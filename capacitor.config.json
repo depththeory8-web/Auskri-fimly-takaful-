@@ -1,0 +1,8 @@
+{
+  "appId": "pk.askari.familytakaful.assistant",
+  "appName": "Askari Takaful",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
