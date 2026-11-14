@@ -104,7 +104,8 @@ fun DashboardScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .widthIn(max = 980.dp),
+                .widthIn(max = 980.dp)
+                .testTag("dashboard_list"),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -528,7 +529,8 @@ private fun DueLeadPreviewCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable(onClick = onOpenFollowUps),
+            .clickable(onClick = onOpenFollowUps)
+            .testTag("due_lead_card_${lead.id}"),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         border = BorderStroke(1.dp, AmberWarning.copy(alpha = 0.35f))
@@ -556,8 +558,11 @@ private fun DueLeadPreviewCard(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Filled.Event, contentDescription = null, modifier = Modifier.size(14.dp), tint = AmberWarning)
                     Spacer(Modifier.width(4.dp))
+                    val dateLabel = lead.followUpDate.ifBlank {
+                        if (language == AppLanguage.URDU) "مقررہ" else "Scheduled"
+                    }
                     Text(
-                        text = "${lead.followUpDate.ifBlank { "Scheduled" }} • $statusText",
+                        text = "$dateLabel • $statusText",
                         style = MaterialTheme.typography.labelSmall,
                         color = AmberWarning
                     )
@@ -566,7 +571,8 @@ private fun DueLeadPreviewCard(
             Spacer(Modifier.width(8.dp))
             FilledTonalButton(
                 onClick = onDraftAi,
-                shape = RoundedCornerShape(10.dp)
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier.testTag("due_lead_ai_${lead.id}")
             ) {
                 Icon(Icons.AutoMirrored.Filled.Send, contentDescription = null, modifier = Modifier.size(16.dp))
             }

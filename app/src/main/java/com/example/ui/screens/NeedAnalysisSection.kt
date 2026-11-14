@@ -141,6 +141,8 @@ fun NeedAnalysisSection(
             }
 
             if (expanded) {
+                val rawBudget = monthlyBudgetText.filter { it.isDigit() }.toLongOrNull()
+                val showMinimumHint = rawBudget == null || rawBudget < 5_000L
                 OutlinedTextField(
                     value = monthlyBudgetText,
                     onValueChange = { raw ->
@@ -148,6 +150,17 @@ fun NeedAnalysisSection(
                         if (digits.length <= 8) monthlyBudgetText = digits
                     },
                     label = { Text(strings.needCalcMonthlyLabel) },
+                    supportingText = if (showMinimumHint) {
+                        {
+                            Text(
+                                if (language == AppLanguage.URDU) {
+                                    "کم از کم حساب PKR 5,000 سے شروع ہوتا ہے"
+                                } else {
+                                    "Calculator applies a minimum planning budget of PKR 5,000"
+                                }
+                            )
+                        }
+                    } else null,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier
@@ -173,7 +186,7 @@ fun NeedAnalysisSection(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
-                    listOf(5, 10, 15, 20).forEach { yrs ->
+                    listOf(5, 10, 15, 20, 25, 30).forEach { yrs ->
                         FilterChip(
                             selected = horizonYears == yrs,
                             onClick = { horizonYears = yrs },

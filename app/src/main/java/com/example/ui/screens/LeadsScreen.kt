@@ -5,6 +5,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -82,6 +84,7 @@ import com.example.ui.viewmodel.MainViewModel
 import com.example.ui.viewmodel.UiState
 import com.example.util.OutreachIntents
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun LeadsScreen(
     strings: UiStrings,
@@ -139,27 +142,48 @@ fun LeadsScreen(
                 .fillMaxSize()
                 .widthIn(max = 980.dp)
         ) {
-            Row(
+            FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
                     text = strings.leadsTitle,
                     style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.weight(1f)
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.align(Alignment.CenterVertically)
                 )
-                OutlinedButton(
-                    onClick = { OutreachIntents.exportLeadsCsv(context, filteredLeads) },
-                    enabled = filteredLeads.isNotEmpty(),
-                    shape = RoundedCornerShape(10.dp),
-                    modifier = Modifier.testTag("export_csv_button")
-                ) {
-                    Icon(Icons.Filled.Download, contentDescription = null, modifier = Modifier.size(18.dp))
-                    Spacer(Modifier.width(6.dp))
-                    Text(strings.exportCsv)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(
+                        onClick = {
+                            upgradingProspectId = null
+                            editorLead = Lead(city = OwnerProfile.DEFAULT_MARKET_CITY)
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Navy900, contentColor = PureWhite),
+                        shape = RoundedCornerShape(10.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                        modifier = Modifier.testTag("add_full_lead_button")
+                    ) {
+                        Icon(Icons.Filled.PersonAdd, contentDescription = null, tint = Gold400, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text(strings.addLead, maxLines = 1)
+                    }
+                    OutlinedButton(
+                        onClick = {
+                            OutreachIntents.exportLeadsCsv(context, filteredLeads, filteredProspects)
+                        },
+                        enabled = filteredLeads.isNotEmpty() || filteredProspects.isNotEmpty(),
+                        shape = RoundedCornerShape(10.dp),
+                        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
+                        modifier = Modifier.testTag("export_csv_button")
+                    ) {
+                        Icon(Icons.Filled.Download, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(Modifier.width(6.dp))
+                        Text(strings.exportCsv, maxLines = 1)
+                    }
                 }
             }
 
@@ -769,8 +793,9 @@ private fun LeadCard(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Filled.Event, contentDescription = null, modifier = Modifier.size(14.dp), tint = AmberWarning)
                     Spacer(Modifier.width(4.dp))
+                    val followUpPrefix = if (language == AppLanguage.URDU) "فالو اپ" else "Follow-up"
                     Text(
-                        text = "Follow-up: ${lead.followUpDate}",
+                        text = "$followUpPrefix: ${lead.followUpDate}",
                         style = MaterialTheme.typography.labelSmall,
                         color = AmberWarning
                     )

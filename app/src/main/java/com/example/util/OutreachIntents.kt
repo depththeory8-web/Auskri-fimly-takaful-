@@ -170,7 +170,10 @@ object OutreachIntents {
         }
     }
 
-    fun buildLeadsCsv(leads: List<Lead>): String {
+    fun buildLeadsCsv(
+        leads: List<Lead>,
+        prospects: List<com.example.data.model.Prospect> = emptyList()
+    ): String {
         val sb = StringBuilder()
         // UTF-8 BOM so Urdu script opens properly in Excel
         sb.append('\uFEFF')
@@ -194,12 +197,35 @@ object OutreachIntents {
             ).joinToString(",") { escapeCsv(it) }
             sb.appendLine(row)
         }
+        for (prospect in prospects) {
+            val row = listOf(
+                prospect.name,
+                "",
+                "",
+                "",
+                "",
+                extractPhoneOrNull(prospect.contact).orEmpty(),
+                extractEmailOrNull(prospect.contact).orEmpty(),
+                "",
+                "",
+                "Quick Prospect",
+                "",
+                prospect.status,
+                "",
+                prospect.notes
+            ).joinToString(",") { escapeCsv(it) }
+            sb.appendLine(row)
+        }
         return sb.toString()
     }
 
-    fun exportLeadsCsv(context: Context, leads: List<Lead>) {
+    fun exportLeadsCsv(
+        context: Context,
+        leads: List<Lead>,
+        prospects: List<com.example.data.model.Prospect> = emptyList()
+    ) {
         try {
-            val csvContent = buildLeadsCsv(leads)
+            val csvContent = buildLeadsCsv(leads, prospects)
             val exportDir = File(context.cacheDir, "exports").apply { mkdirs() }
             val timestamp = SimpleDateFormat("yyyyMMdd_HHmm", Locale.US).format(java.util.Date())
             val csvFile = File(exportDir, "askari_takaful_leads_$timestamp.csv")
@@ -214,6 +240,7 @@ object OutreachIntents {
                 type = "text/csv"
                 putExtra(Intent.EXTRA_STREAM, uri)
                 putExtra(Intent.EXTRA_SUBJECT, "Askari Family Takaful Leads Export")
+                clipData = ClipData.newRawUri("Askari Family Takaful Leads CSV", uri)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
             context.startActivity(Intent.createChooser(shareIntent, "Export Leads CSV"))

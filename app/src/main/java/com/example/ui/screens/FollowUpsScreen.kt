@@ -26,6 +26,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAlert
+import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Event
@@ -225,7 +226,15 @@ fun FollowUpsScreen(
                             overrideDueCount = dueList.size,
                             overrideIsUrdu = isUrdu
                         )
-                        if (!shown) permissionDeniedHint = true
+                        if (shown) {
+                            Toast.makeText(
+                                context,
+                                if (isUrdu) "ٹیسٹ نوٹیفکیشن بھیج دیا گیا ہے۔" else "Test notification sent.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            permissionDeniedHint = true
+                        }
                     }
                 }
             )
@@ -499,14 +508,31 @@ private fun FollowUpLeadCard(
                 }
             }
 
+            val followUpContext = LocalContext.current
+            val canCallLead = lead.contactPhone.isNotBlank() &&
+                lead.permissionStatus != com.example.data.model.LeadPermissionStatus.DO_NOT_CONTACT.name
+
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Filled.Event, contentDescription = null, modifier = Modifier.size(16.dp), tint = AmberWarning)
                 Spacer(Modifier.width(6.dp))
                 Text(
                     text = if (lead.followUpDate.isNotBlank()) "${strings.fieldFollowUpDate}: ${lead.followUpDate}" else strings.noFollowUpDateSet,
                     style = MaterialTheme.typography.labelMedium,
-                    color = if (isOverdue) AmberWarning else MaterialTheme.colorScheme.onSurface
+                    color = if (isOverdue) AmberWarning else MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f)
                 )
+                if (canCallLead) {
+                    OutlinedButton(
+                        onClick = { OutreachIntents.dialPhone(followUpContext, lead.contactPhone) },
+                        shape = RoundedCornerShape(10.dp),
+                        contentPadding = PaddingValues(horizontal = 10.dp, vertical = 4.dp),
+                        modifier = Modifier.testTag("followup_call_${lead.id}")
+                    ) {
+                        Icon(Icons.Filled.Call, contentDescription = strings.callProspect, modifier = Modifier.size(14.dp))
+                        Spacer(Modifier.width(4.dp))
+                        Text(strings.callProspect, style = MaterialTheme.typography.labelSmall)
+                    }
+                }
             }
 
             Row(
@@ -575,7 +601,7 @@ private fun FollowUpLeadCard(
                             val channel = ContactChannel.fromString(entry.channel)
                             val dateStr = entry.createdAt?.toDate()?.let {
                                 SimpleDateFormat("dd MMM yyyy, hh:mm a", Locale.US).format(it)
-                            } ?: "Just now"
+                            } ?: if (language == AppLanguage.URDU) "ابھی" else "Just now"
                             Surface(
                                 color = MaterialTheme.colorScheme.surfaceVariant,
                                 shape = RoundedCornerShape(10.dp),
@@ -594,8 +620,9 @@ private fun FollowUpLeadCard(
                                         )
                                         Text(text = entry.summary, style = MaterialTheme.typography.bodySmall)
                                         if (entry.outcome.isNotBlank()) {
+                                            val outcomePrefix = if (language == AppLanguage.URDU) "نتیجہ" else "Outcome"
                                             Text(
-                                                text = "Outcome: ${entry.outcome}",
+                                                text = "$outcomePrefix: ${entry.outcome}",
                                                 style = MaterialTheme.typography.labelSmall,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                                             )

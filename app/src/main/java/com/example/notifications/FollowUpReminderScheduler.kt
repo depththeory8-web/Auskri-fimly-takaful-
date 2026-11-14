@@ -9,6 +9,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -20,6 +21,14 @@ import java.util.Calendar
 class FollowUpReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
         FollowUpReminderScheduler.showDailyFollowUpNotification(context)
+    }
+}
+
+class FollowUpBootReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent?) {
+        if (intent?.action == Intent.ACTION_BOOT_COMPLETED) {
+            FollowUpReminderScheduler.rescheduleIfEnabled(context)
+        }
     }
 }
 
@@ -50,6 +59,20 @@ object FollowUpReminderScheduler {
             .putInt(KEY_DUE_COUNT, dueCount)
             .putBoolean(KEY_IS_URDU, isUrdu)
             .apply()
+    }
+
+    fun rescheduleIfEnabled(context: Context) {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        if (!prefs.getBoolean(KEY_ENABLED, false)) return
+        val hour = prefs.getInt(KEY_HOUR, 9)
+        val dueCount = prefs.getInt(KEY_DUE_COUNT, 0)
+        val isUrdu = prefs.getBoolean(KEY_IS_URDU, true)
+        scheduleDailyMorningReminder(
+            context = context,
+            hourOfDay = hour,
+            dueCount = dueCount,
+            isUrdu = isUrdu
+        )
     }
 
     fun hasNotificationPermission(context: Context): Boolean {
@@ -91,12 +114,16 @@ object FollowUpReminderScheduler {
         }
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            triggerCal.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            buildAlarmPendingIntent(context)
-        )
+        try {
+            alarmManager.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                triggerCal.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                buildAlarmPendingIntent(context)
+            )
+        } catch (_: SecurityException) {
+            // Fallback gracefully if an OEM firmware restricts alarm scheduling
+        }
     }
 
     fun cancelDailyReminder(context: Context) {
@@ -147,8 +174,10 @@ object FollowUpReminderScheduler {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
+        val largeMonogram = BitmapFactory.decodeResource(context.resources, R.drawable.askari_monogram)
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.askari_monogram)
+            .setSmallIcon(R.drawable.ic_notification_takaful)
+            .setLargeIcon(largeMonogram)
             .setContentTitle(title)
             .setContentText(body)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))

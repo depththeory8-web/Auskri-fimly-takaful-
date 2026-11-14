@@ -142,6 +142,14 @@ fun MainAppShell(
         }
     }
 
+    LaunchedEffect(metrics.followUpsDue, language) {
+        com.example.notifications.FollowUpReminderScheduler.updateDueCount(
+            context = context,
+            dueCount = metrics.followUpsDue,
+            isUrdu = language == AppLanguage.URDU
+        )
+    }
+
     BackHandler(enabled = !showAddProspect && currentTab != AppTab.DASHBOARD) {
         currentTab = AppTab.DASHBOARD
     }

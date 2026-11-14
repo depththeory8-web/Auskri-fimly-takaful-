@@ -112,7 +112,8 @@ fun ProspectSearchScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .widthIn(max = 980.dp),
+                .widthIn(max = 980.dp)
+                .testTag("prospect_search_list"),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
