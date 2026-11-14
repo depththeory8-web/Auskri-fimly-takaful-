@@ -1,0 +1,6 @@
+{
+  "name": "Askari Takaful",
+  "description": "Askari Family Takaful sales assistant for General Manager lead management, prospect search, bilingual Urdu and English messaging, product notes, monthly sales targets, and follow-up tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
