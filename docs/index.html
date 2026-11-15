@@ -1,0 +1,2222 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0B192C">
+  <title>Askari Family Takaful • GM Sales Assistant</title>
+  <style>
+    :root {
+      --navy-950: #06101E;
+      --navy-900: #0B192C;
+      --navy-800: #13294B;
+      --navy-700: #1D3D6E;
+      --gold-400: #E5C76B;
+      --gold-500: #D4AF37;
+      --gold-soft: #FAF3DC;
+      --bg: #F4F5F7;
+      --surface: #FFFFFF;
+      --surface-alt: #EEF2F7;
+      --border: #DCE2EC;
+      --text: #0F172A;
+      --muted: #526075;
+      --green: #0F766E;
+      --green-soft: #E6F4F1;
+      --amber: #B45309;
+      --amber-soft: #FEF3C7;
+      --red: #B91C1C;
+      --red-soft: #FEE2E2;
+      --radius: 16px;
+      --shadow: 0 6px 20px rgba(11, 25, 44, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Arabic", Arial, sans-serif; line-height: 1.5; }
+    a { color: var(--navy-700); }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; border: 0; border-radius: 11px; padding: 11px 15px; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; transition: transform .08s ease, opacity .15s ease, background .15s ease; }
+    button:active { transform: scale(.98); }
+    button:disabled { opacity: .48; cursor: not-allowed; }
+    .btn-primary { background: var(--navy-900); color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: var(--navy-800); }
+    .btn-gold { background: var(--gold-500); color: var(--navy-950); }
+    .btn-gold:hover:not(:disabled) { background: var(--gold-400); }
+    .btn-outline { background: var(--surface); color: var(--navy-900); border: 1px solid var(--border); }
+    .btn-soft { background: var(--surface-alt); color: var(--navy-900); }
+    .btn-success { background: var(--green); color: #fff; }
+    .btn-danger { background: var(--red-soft); color: var(--red); }
+    .btn-sm { min-height: 38px; padding: 7px 12px; font-size: 13px; border-radius: 9px; }
+
+    /* Top Executive Header */
+    .topbar {
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 58%, var(--navy-800) 100%);
+      color: #fff;
+      padding: 14px 16px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 4px 18px rgba(6, 16, 30, 0.22);
+    }
+    .topbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .monogram-wrap {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      padding: 3px;
+      background: radial-gradient(circle, #18273e 0%, #07101d 100%);
+      border: 1.5px solid var(--gold-500);
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, .7), 0 2px 10px rgba(0,0,0,.35);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .monogram-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      filter: contrast(1.06) brightness(0.95);
+    }
+    .brand-text h1 { margin: 0; font-size: 17px; font-weight: 700; color: #fff; letter-spacing: .2px; }
+    .brand-text p { margin: 2px 0 0; font-size: 12px; color: var(--gold-400); }
+    .topbar-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .pill-status {
+      font-size: 12px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #22C55E; display: inline-block; }
+    .dot.local { background: var(--gold-400); }
+
+    /* Desktop / Tablet Tab Rail */
+    .nav-tabs {
+      max-width: 1120px;
+      margin: 14px auto 0;
+      padding: 0 14px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      background: var(--surface);
+      color: var(--navy-900);
+      border: 1px solid var(--border);
+      padding: 10px 15px;
+      border-radius: 12px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    .nav-btn.active {
+      background: var(--navy-900);
+      color: var(--gold-400);
+      border-color: var(--navy-900);
+      box-shadow: 0 4px 12px rgba(11, 25, 44, .18);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1120px;
+      margin: 12px auto 96px;
+      padding: 0 14px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .card-dark {
+      background: linear-gradient(135deg, var(--navy-900), var(--navy-800));
+      color: #fff;
+      border: 1px solid rgba(212, 175, 55, .45);
+    }
+    .card-dark h2, .card-dark h3 { color: var(--gold-400); }
+    .card-title { margin: 0 0 10px; font-size: 17px; font-weight: 700; color: var(--navy-900); display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .card-dark .muted { color: #CBD5E1; }
+
+    /* Grids */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(11,25,44,.04);
+      text-align: start;
+      width: 100%;
+      display: block;
+    }
+    .metric-card:hover { border-color: var(--gold-500); }
+    .metric-val { font-size: 26px; font-weight: 800; color: var(--navy-900); line-height: 1.15; }
+    .metric-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 600; }
+
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    /* Forms */
+    label.field-lbl { display: block; font-size: 13px; font-weight: 600; margin: 10px 0 5px; color: var(--navy-900); }
+    input[type="text"], input[type="tel"], input[type="email"], input[type="url"], input[type="number"], input[type="date"], select, textarea {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      font-size: 14px;
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--gold-500); border-color: var(--navy-900); }
+    textarea { min-height: 105px; resize: vertical; }
+    .ltr-input { direction: ltr; text-align: left; }
+
+    /* Badges & Progress */
+    .badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--surface-alt); color: var(--navy-900); }
+    .badge-gold { background: var(--gold-soft); color: #7C5B06; border: 1px solid rgba(212,175,55,.45); }
+    .badge-green { background: var(--green-soft); color: var(--green); }
+    .badge-amber { background: var(--amber-soft); color: var(--amber); }
+    .badge-red { background: var(--red-soft); color: var(--red); }
+
+    .progress-wrap { background: var(--surface-alt); height: 10px; border-radius: 999px; overflow: hidden; margin-top: 6px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--navy-800), var(--gold-500)); border-radius: 999px; transition: width .25s ease; }
+
+    /* Lists & Chips */
+    .chip-row { display: flex; gap: 7px; flex-wrap: wrap; margin: 8px 0 12px; }
+    .chip { background: var(--surface-alt); color: var(--navy-900); border: 1px solid var(--border); padding: 7px 12px; border-radius: 999px; font-size: 13px; min-height: 36px; }
+    .chip.active { background: var(--navy-900); color: var(--gold-400); border-color: var(--navy-900); }
+
+    .item-box {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 14px;
+      margin-bottom: 10px;
+      background: #fff;
+    }
+    .item-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; flex-wrap: wrap; }
+    .item-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+    .notice {
+      background: var(--gold-soft);
+      border-inline-start: 4px solid var(--gold-500);
+      padding: 11px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      color: #4A3804;
+    }
+    .notice-danger {
+      background: var(--red-soft);
+      border-inline-start: 4px solid var(--red);
+      padding: 11px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      color: #7F1D1D;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 16, 30, 0.62);
+      z-index: 80;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+    .modal {
+      background: var(--surface);
+      border-radius: 18px;
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 0 24px 48px rgba(0,0,0,.3);
+    }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .modal-head h3 { margin: 0; font-size: 18px; color: var(--navy-900); }
+
+    /* Mobile Bottom Bar */
+    .bottom-nav { display: none; }
+
+    .hidden { display: none !important; }
+
+    .toast {
+      position: fixed;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--navy-950);
+      color: var(--gold-400);
+      border: 1px solid var(--gold-500);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 120;
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+
+    @media (max-width: 767px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .nav-tabs { display: none; }
+      .bottom-nav {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--navy-900);
+        border-top: 1px solid rgba(212, 175, 55, .45);
+        z-index: 50;
+        padding: 4px 2px env(safe-area-inset-bottom, 4px);
+      }
+      .bottom-nav button {
+        background: transparent;
+        color: #CBD5E1;
+        flex-direction: column;
+        gap: 2px;
+        padding: 6px 2px;
+        min-height: 54px;
+        font-size: 10.5px;
+        border-radius: 8px;
+      }
+      .bottom-nav button.active {
+        color: var(--gold-400);
+        background: rgba(212, 175, 55, .14);
+      }
+      .bottom-nav .ico { font-size: 16px; line-height: 1; }
+    }
+
+    @media print {
+      body { background: #fff !important; color: #000 !important; }
+      .topbar { position: static !important; background: #fff !important; color: #000 !important; border-bottom: 2px solid #0B192C !important; box-shadow: none !important; }
+      .brand-text h1 { color: #0B192C !important; }
+      .brand-text p { color: #334155 !important; }
+      .topbar-actions, .nav-tabs, .bottom-nav, button, .item-actions, .toast, .modal-backdrop { display: none !important; }
+      .container { margin: 12px auto !important; padding: 0 !important; max-width: 100% !important; }
+      .card, .card-dark, .item-box, .metric-card { background: #fff !important; color: #000 !important; box-shadow: none !important; border: 1px solid #CBD5E1 !important; break-inside: avoid; }
+      .card-dark h2, .card-dark h3, .metric-val { color: #0B192C !important; }
+      .muted, .card-dark .muted { color: #475569 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="monogram-wrap">
+          <img alt="Askari Family Takaful monogram" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk8BDg4OExETJhUVJk81LTVPT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT//AABEIAMQAxAMBIgACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAABQYDBAcCAf/EAEIQAAEDAwEGAwQHBQUJAAAAAAEAAgMEBREGEhMhMUFRFCJhBxUjcUJSVJGSobEWNHKBwRcyN0N0YnN1gpOys8Lw/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAMEBQECBv/EACIRAQACAgMAAgIDAAAAAAAAAAABAgMRBBITMUEUIQUiUf/aAAwDAQACEQMRAD8A6ciIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAhOEWtW1TKSnfNJyYM/NctOo27EbnUM+RlfVTHX6vM221zWt+phWe21ja2lbKOB5OHYqHHnredQlyce+ON2bqIinQiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIvhQHHCpWqb9TeM8FveEZ8+B1U9qa6ttNqfLn4r/LGPVcqjhkneXSk5ccucepXjLWLV00OBg727Ss8JZKwPjcHNPUKXsdUaSpDCfJKcHPQqIsdsnjtslRk7vPlGOnVbjWkcuixL74+RfzTXLWaLwDlelG2ir8RThrz8RnA+vqpELZxZIvXbCvWazqX1ERSvIiIgIiICIiAiIgIiICIiAiIgIiIBXh7g1uSeAXo8lXtV3M0lJ4eI/FmGOHRvdJnSTFjnJaKwqWo6512uxcXHw0BLIx37lYrfROrKuKlYD5zhx7N6rA1mOSu2lLWaeDxcrcSSjh6BQxM2l9BmtXiYOsfKbp6SOCkbTtaNhrcKuVtKaapLceU8QrWtK5Uu/hy3++3iFX52D0x7hh4M01vuftB0UxpqgSZ4cnK0RuDwHNPAhVUNIPqpm0z5ZuXdP7qofx3JmtvOyblU3HaEoi+c19C3VEREQEREBERAREQEREBERAREQEyi8uOAUGOomZDA6WQgNaMnK5vcat9fWyTvOQTho7BWHVlwyRQxu4Hi/H6KsNYS4Bo4k4A7qvlv9Q3P47BFK+tm9ZLea+uawj4TTtPP9F0JgDGBoGAOGFG2C2igoGtcPiP8zj6lNQ3Rlqtcs5PxCNlg7uUuKuoZ/Kyzny6hH12po6bUsNvy0wEbMr88nHkFY8gjj2XFJHvkldI95c97sud3K6hpGvmuFkjknB22HYLj9LHVS2r+nM/H86xZ9uFMIp9to8rv1WGImJwe0nIU5UwiaItPNQhBY4td0K+X52C2HL3q7jydq9ZTsMgkia4dQsoURbqjZk3TncHclLDktziZvXHE/araNS+oiK08iIiAiIgIiICIiAiIgIiIC0rlWsoqN8zzyGB6lbhOFS9S13iq3w7HZih59i5R5L9I2scbDOXJFULLI+onfNIcuccnKmtM24VNVv5G5ZFy+aioIHzTNjjGXOOAr9b6RlHRshb9EcfUqrhrN7bavNzxix+dWyODcnsuY6ru3vO5lkTs08B2W9nHqVbdYXf3fb9zE7E8/lbj6I6lc2DcDH3LRrCpwcE2/vLYt1FJcK+GkjHmkdz7DqV1ugpI6OkjpoWhrIxgYXPNLXW22oSz1AkdO47OWtzgKyjW1sP+XUfgXbRM/DxzLWvfUR+lnWN1PE5xc5jST6KvftpbfqT/AIF9/bO29GT/AIFHbD2+YU+lk+KaEEERtBHI4WUDCrg1lbz/AJc/4F7i1bb5ZWR7Mzdo4yWcAkYuvxB0ssKLy0hwyDkL0jwIiICIiAiIgIiICIiAiIgxy5LHBvPC53PDJDPIyUEODuOevqukLBJTQynMkTHH1aosuP0jSzxuR4W3pTbBJFFco3SkAEEAnurqMFowOBWHwNMOUMf4QthrQ0YHAdlzDSaRp55Gb1t2c813TTi6MqHAmF0YaHY4A9VWTy2g4HouzSwxyt2ZWNcOxGVr+66H7JF+AKx2WcPO86ddOHNqH0szmniM8iVuw1tPLw3ga7s5di9028njRwH5sCe6Lb9hp/8Aphe4yaRTydzvTlDSMZyPmvYP+1+a6sLZQtGG0sOP4AvXu2j+yw/gC9ex+RH+OVNPr+a9BdT93Uf2aH8AT3dRfZovwBPVz8iJ+kXpW5+NodxK740AAPqOhU+OSwRUsEBzDCxhPVrcFZ+QUM/KtadyIiLjgiIgIiICIiAmQq3rXUv7N2xkscYknmfsRtPIYGST/wDdVUptSa6oaBl1qqanFEcHG7HI/LiEHUcplVCbWbGaJZfmw/Ek8gj6B+cfcoAag1261++GU9KaIt2w0R5Jb+qDoN2uEVqtlRXztc6KBu04M5la2nb5TagoDWUkcjIg8sxIBnIVarL77/8AZrcqt8RimbFsSMxwzkclFaRv9Pp7QMtVOQZHVD2wx/Xdj9EHUMjumR3VK03fr3U2upvV5jghoI4y6NrWYc7Hr2UHSao1nfBPVWWlgbSROxsloP5nmUHUchMhUvReram+xVkFdCxlXSt2iWjAdz/qFWqL2iX2sppYKekjmrXkCIRxE7I6khBfL/qWisVTSQ1Ucr3VbtlpYOA6ZK27zdobRbxVSsdJtOayONvN7jyAVKvuobnRUtj8bSUr6qePblFRDksdtAcOx4re1uy6vNueyemFO6ri3TTGS5r8HiTniEFqtVXU1lOZKuhko37WBG9wJx34LfyFWq+5Xe2UNNTyeHqrpVzGKMsYWxgc8kZ6Ba9cdVWyhkr33Giq2wNL5IPD7AIHPBHFBbSQOaKsXzUj6XTVBeaNgLKiWElrhk7DuY+a8VI1Z4R9fBV0UQa3bbSGHPl7F3fCC05C8vcGsc45wATwVTttzvepaOOttksFupyMZki3jnuHP0AW7p+6V09dXWu7bs1lFskyRDDZGO5HHQoPX7TwP05V3mKnmMdMXAxvGyThTVNKJ6eKYAjeMD8HpkZVNrbjNc/ZvdaidsbXgzM8jcDDX4Ck4rpU0V1s9JMGCiraYNY7HESBoOM+oQWXKKK1Hc/dVjqaxoBlY3Zia76TzwaPvW7QGc0UJqy0zlgMmyMDOEGwiIgIeSIgpPtD1FU2ZtHTULI/E1JcRI9odsAYHDPfIVe1LZrzDpp9de7++baDSymAw0k9Fd9VaWpNS08TJ5HwzQk7uRmMjPMfJQkXs4p300kdwulVVP2dmIudwi9QO6CJtLLRP7MaamvVWaWOSeQxyAE4cHFacen9SWm2+PsN5bPRBm8BjkIBb/CeCutLoyij04bJUzSVFOHl8biAHMJ7Y9VCf2Z4G6ZfqwU3WPHT78fkg1ae/wBTf/ZxenVrWb6BgaXtGNrkeSpNPZq+fT8t4jy6mp5dnY547nHbuuwQ6RoKbTVRZad72R1DcSS8Npx4cfyWWxaaprNZZbWJHTwylxdtgAnPRBD0GrYZdAy3JkLDNSMEUkOPKHch/JQtip9Rakt0txlvpoKHacN3A0NxjnyxhTts0DR2/wAZE2tnlp6uMxyQuAx6H5hatH7No4HGOS8VbqQu2jA3yh3zQQXsvDW3e7jb22iE4efpDJ4rL7HmNNbcXkDaDGAHtxKtVh0XTWKunqKSrlcydpYY3NGAD6+izaV0jT6ZlqH09VNPvwAQ8AYx8kFZ9qHC8WnP1T/3tVg1l+52b/iEP6FbOpNKw6gq6WomqpYTTjADAPNxB6/Jbt2s7LpDSRySuj8LOydpaOZaMYKDTv8Acq2O50VqtbYvF1Qc/eyjLYmt4E46qPv1rrWWKtmuOoKl7GQOJYxrY2E45cBlTF8sLbtJT1EdTJSVdK4mKaPBIzzB7hartOVNadm9XWSshAI3LIxGwnuR1KCCrvN7PNOg44zUox/NXmp/dpf4XfoVAx6Ua2y09rkr55YqadksbnNGQGHIb8lYZWGSNzOW0CPvCCA0AMaMt+PqH9SsVs4e0K9/6WD+qmLHbGWe0QW+OR0jYRgOcOJXiC0sgvtZdWyuL6qNkZZjg0NQU6L/AAuu/wDvaj/yKd1BQyVejoZaYHxVHFHUQ457TADj8lsN01E3TdVZfESbupc9zpMDI2jkqWBioqNjJZWhkUYBc7hwA5oKtNVx6luljgiO1TiMV9QAMjhwaD/zH8lcW9VUPZ7b4oqOruUTHNZWzOdBtcxECdn5DmcequAGEBERAREQEwERAwmERAwmERBp3WStit8z7bEyWqA+Gx5wCVSTqrVgvYs/uqh8YY95s7Zxs/NdCKoc3+L8X+hH9UE9S36KlpYo9Q1NFR3B2dqISj+S19Sajktctq8CyGeOvqGxFxOQASOWFUat0NwuGoJqChoGsjc9s9RXyOe4kZ/uN6KOqHTnR+mPDkGo8YRFtdHZ4IOsm4UYrDSGqiE4G0Y9rjj1WvDfrTPVeFhuNM+o6RtkGVQrDU01Bb9RC8wSOu0Yc6oIfh8jDww09Aom4ROit1klbSW6jifUsMTIHl0xHdzuqC7Tatll1g20UZozTRgb2SSTDieob6hWWO40UtLJUx1UToYs7bw7g3HPKpdHRUv9pdxb4aIiOka9o2RwcQOI9VG2GspoPZ7eoZp42SOlkAYTg8UFsu+o301zs0NEYJqe4S7BfknhnmFZRxXLIOFPobHAbz/2XVAgJhEQMLQuVmt91bG24UzZ2xnLQ7kFvog8QwxwRMihYGMYNlrRyAXtEQEREBERAREQEREBERAPJaLrVQuuouZpm+NDdgS5Odnst5EELNpayT1z6ya3xOnkOXnJw49yF6ZpuziCCAUEYip5N5EMnyO7hTCIIyew2qprX1s9FG+oe0sc858zexWnFo7T8Uew22xkBwcMkkgjt2U+iDSjtdFFcH18dO0VT2hjpeOSB0Ue7SNgfWS1b7bE6WUHbJzg558OSnUQRgsNrApB4OPFF+7jj8P5KSGeq+ogIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiDX37uwTfu7BEQN+7sE37uwREDfu7BN+7sERA37uwTfu7BEQN+7sE37uwREDfu7BN+7sERA37uwTfu7BEQN+7sE37uwREDfu7BN+7sERA37uwTfu7BEQN+7sE37uwREDfu7BN+7sERA37uwREQf/Z">
+        </div>
+        <div class="brand-text">
+          <h1 id="hdrTitle">عسکری فیملی تکافل سیلز اسسٹنٹ</h1>
+          <p id="hdrSubtitle">جنرل منیجر • اسلام آباد • +92 316 0894696</p>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <button class="pill-status" id="cloudSyncBtn" onclick="openCloudModal()">
+          <span class="dot local" id="syncDot"></span>
+          <span id="syncLabel">براؤزر اسٹوریج فعال</span>
+        </button>
+        <button class="btn-gold btn-sm" id="langToggleBtn" onclick="toggleLang()">English</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav-tabs" id="topTabs">
+    <button class="nav-btn active" data-tab="dashboard" onclick="switchTab('dashboard')"><span data-i18n="navDashboard">ڈیش بورڈ</span></button>
+    <button class="nav-btn" data-tab="search" onclick="switchTab('search')"><span data-i18n="navSearch">تلاش</span></button>
+    <button class="nav-btn" data-tab="leads" onclick="switchTab('leads')"><span data-i18n="navLeads">لیڈز</span></button>
+    <button class="nav-btn" data-tab="studio" onclick="switchTab('studio')"><span data-i18n="navStudio">میسج اسٹوڈیو</span></button>
+    <button class="nav-btn" data-tab="products" onclick="switchTab('products')"><span data-i18n="navProducts">پروڈکٹس</span></button>
+    <button class="nav-btn" data-tab="followups" onclick="switchTab('followups')"><span data-i18n="navFollowUps">فالو اپ</span></button>
+  </nav>
+
+  <main class="container">
+    <!-- TAB 1: DASHBOARD -->
+    <section id="tab-dashboard" class="tab-page">
+      <div class="card card-dark">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <div>
+            <h2 style="margin:0 0 4px" data-i18n="executiveBriefTitle">ایگزیکٹو سیلز جائزہ</h2>
+            <p class="muted" style="margin:0" id="gmProfileLine">Askari Family Takaful • General Manager • +923160894696</p>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-gold btn-sm" onclick="openLeadModal(null)" data-i18n="addLead">نئی لیڈ شامل کریں</button>
+            <button class="btn-outline btn-sm" onclick="exportCsv()" data-i18n="exportCsv">CSV برآمد کریں</button>
+            <button class="btn-outline btn-sm" id="dashboardPrintBtn" onclick="printSummary()" data-i18n="printSummary">خلاصہ پرنٹ کریں</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="metrics-grid" id="metricsGrid"></div>
+
+      <div class="card">
+        <div class="card-title">
+          <span data-i18n="monthlyTargetsTitle">ماہانہ جی ایم سیلز اہداف و ریفرل ٹریکر</span>
+          <button class="btn-soft btn-sm" onclick="openTargetsModal()" data-i18n="editTargetsButton">اہداف بدلیں</button>
+        </div>
+        <div class="muted" id="targetMonthLabel" style="margin-bottom:10px"></div>
+        <div class="grid-3" id="targetsBars"></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">
+            <span data-i18n="dueFollowUpsTitle">آج اور بقایا فالو اپس</span>
+            <button class="btn-soft btn-sm" onclick="switchTab('followups')" data-i18n="navFollowUps">فالو اپ</button>
+          </div>
+          <div id="dashboardDueList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-title" data-i18n="quickActionsTitle">فوری اقدامات</div>
+          <div style="display:grid;gap:9px">
+            <button class="btn-primary" onclick="switchTab('search')" data-i18n="navSearch">پبلک پراسپیکٹ سرچ</button>
+            <button class="btn-gold" onclick="switchTab('studio')" data-i18n="navStudio">میسج اسٹوڈیو (WhatsApp / Email)</button>
+            <button class="btn-soft" onclick="switchTab('products')" data-i18n="needCalcTitle">کلائنٹ نیڈ اینالسس کیلکولیٹر</button>
+            <button class="btn-outline" onclick="openCloudModal()" data-i18n="cloudBackupBtn">کلاؤڈ سنک اور JSON بیک اپ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: PROSPECT SEARCH -->
+    <section id="tab-search" class="tab-page hidden">
+      <div class="card">
+        <div class="card-title" data-i18n="prospectSearchTitle">پبلک پراسپیکٹ سرچ</div>
+        <div class="notice" data-i18n="prospectSearchCompliance">
+          یہ سیکشن صرف عوامی گوگل اور بنگ سرچ لنکس بناتا ہے۔ سرچ لنکس تصدیق شدہ لیڈز نہیں ہیں—براؤزر میں معلومات کی تصدیق کے بعد ہی لیڈ محفوظ کریں۔
+        </div>
+        <div class="grid-2">
+          <div>
+            <label class="field-lbl" for="searchCity" data-i18n="cityLabel">شہر (مارکیٹ)</label>
+            <input id="searchCity" type="text" value="Islamabad" placeholder="Islamabad, Rawalpindi, Lahore">
+          </div>
+          <div>
+            <label class="field-lbl" for="searchIndustry" data-i18n="industryLabel">انڈسٹری / کاروبار کی نوعیت</label>
+            <input id="searchIndustry" type="text" value="Corporate Business" placeholder="Real Estate, Healthcare, IT">
+          </div>
+          <div>
+            <label class="field-lbl" for="searchDesignation" data-i18n="designationLabel">فیصلہ ساز عہدہ</label>
+            <input id="searchDesignation" type="text" value="CEO Managing Director" placeholder="CEO, Director, Doctor">
+          </div>
+          <div>
+            <label class="field-lbl" for="searchKeywords" data-i18n="keywordLabel">اضافی الفاظ (اختیاری)</label>
+            <input id="searchKeywords" type="text" placeholder="contact email office">
+          </div>
+        </div>
+        <div class="chip-row">
+          <button class="chip" onclick="setSearchPreset('Islamabad','Real Estate','Director')">Islamabad Real Estate</button>
+          <button class="chip" onclick="setSearchPreset('Rawalpindi','Healthcare Hospital','Doctor Owner')">Rawalpindi Doctors</button>
+          <button class="chip" onclick="setSearchPreset('Islamabad','Software IT Export','CEO Founder')">Islamabad IT CEOs</button>
+          <button class="chip" onclick="setSearchPreset('Lahore','Manufacturing Textile','Managing Director')">Lahore Industry</button>
+        </div>
+        <div class="item-actions">
+          <button class="btn-primary" onclick="openExternalSearch('google')" data-i18n="openGoogleSearch">گوگل سرچ کھولیں</button>
+          <button class="btn-soft" onclick="openExternalSearch('bing')" data-i18n="openBingSearch">بنگ سرچ کھولیں</button>
+          <button class="btn-outline" onclick="openExternalSearch('linkedin')" data-i18n="openLinkedInSearch">لنکڈ اِن سرچ (گوگل)</button>
+          <button class="btn-gold" onclick="handoffSearchToLead()" data-i18n="saveDiscoveredLead">تصدیق شدہ لیڈ محفوظ کریں</button>
+        </div>
+        <p class="muted" style="margin-top:10px" data-i18n="searchVsVerifiedHint">نوٹ: کوئی جعلی نام یا نمبر خود سے نہیں بنایا جاتا۔</p>
+      </div>
+    </section>
+
+    <!-- TAB 3: LEADS & QUICK PROSPECTS -->
+    <section id="tab-leads" class="tab-page hidden">
+      <div class="card">
+        <div class="card-title">
+          <span data-i18n="leadsTitle">لیڈ مینجمنٹ</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn-primary btn-sm" onclick="openLeadModal(null)" data-i18n="addLead">نئی لیڈ شامل کریں</button>
+            <button class="btn-soft btn-sm" onclick="openProspectModal(null)" data-i18n="addNewProspectTitle">نیا پراسپیکٹ شامل کریں</button>
+            <button class="btn-outline btn-sm" onclick="exportCsv()" data-i18n="exportCsv">CSV برآمد کریں</button>
+          </div>
+        </div>
+        <input id="leadSearchInput" type="text" oninput="renderLeads()" placeholder="نام، اسٹیٹس، کمپنی یا شہر تلاش کریں...">
+        <div class="chip-row" id="leadFilterChips"></div>
+        <div id="leadsListContainer"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span data-i18n="quickProspectsHeading">فوری پراسپیکٹس (Quick Prospects)</span>
+          <button class="btn-soft btn-sm" onclick="openProspectModal(null)" data-i18n="saveProspectButton">پراسپیکٹ شامل کریں</button>
+        </div>
+        <div id="prospectsListContainer"></div>
+      </div>
+    </section>
+
+    <!-- TAB 4: MESSAGE STUDIO -->
+    <section id="tab-studio" class="tab-page hidden">
+      <div class="card">
+        <div class="card-title" data-i18n="studioTitle">میسج اسٹوڈیو</div>
+        <p class="muted" style="margin-top:0" data-i18n="studioSubtitle">اردو اور انگریزی پیشہ ورانہ پیغامات تیار کریں۔ واٹس ایپ یا ای میل کھولنے سے پہلے آپ کی منظوری لازمی ہے۔</p>
+
+        <div class="grid-2">
+          <div>
+            <label class="field-lbl" for="studioLeadSelect" data-i18n="selectLeadLabel">محفوظ لیڈ منتخب کریں</label>
+            <select id="studioLeadSelect" onchange="onStudioLeadChange()"></select>
+          </div>
+          <div>
+            <label class="field-lbl" for="studioCustomName" data-i18n="customProspectOption">نام (کسٹم یا منتخب شدہ)</label>
+            <input id="studioCustomName" type="text" placeholder="Client full name" oninput="buildStudioDraft()">
+          </div>
+          <div>
+            <label class="field-lbl" for="studioMsgType" data-i18n="messageTypeLabel">پیغام کی قسم</label>
+            <select id="studioMsgType" onchange="onStudioTypeChange()">
+              <option value="intro">Introduction / تعارف</option>
+              <option value="followup">Follow-up / فالو اپ</option>
+              <option value="meeting">Meeting Request / ملاقات کی درخواست</option>
+              <option value="referral">Referral Request / ریفرل درخواست</option>
+              <option value="objection">Objection Reply / اعتراض کا جواب</option>
+              <option value="thanks">Thank You / شکریہ</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl" for="studioMsgLang" data-i18n="messageLanguageLabel">پیغام کی زبان</label>
+            <select id="studioMsgLang" onchange="buildStudioDraft()">
+              <option value="ur">اردو (Urdu)</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl" for="studioProductSelect" data-i18n="productFocusLabel">متعلقہ تکافل پلان</label>
+            <select id="studioProductSelect" onchange="buildStudioDraft()"></select>
+          </div>
+          <div id="studioObjectionWrap" class="hidden">
+            <label class="field-lbl" for="studioObjectionSelect" data-i18n="objectionPresetLabel">کلائنٹ کا عام اعتراض</label>
+            <select id="studioObjectionSelect" onchange="buildStudioDraft()">
+              <option value="shariah">Shariah compliance / شرعی حیثیت</option>
+              <option value="budget">Budget & affordability / بجٹ اور قسط</option>
+              <option value="think">Need time to think / سوچنے کے لیے وقت</option>
+              <option value="existing">Already have savings / پہلے سے بچت موجود</option>
+            </select>
+          </div>
+        </div>
+
+        <label class="field-lbl" for="studioExtraContext" data-i18n="extraContextLabel">اضافی ہدایات یا پس منظر</label>
+        <input id="studioExtraContext" type="text" placeholder="e.g. Child university planning in 12 years" oninput="buildStudioDraft()">
+
+        <div class="item-actions" style="margin-bottom:10px">
+          <button class="btn-primary" onclick="buildStudioDraft()" data-i18n="rebuildDraftBtn">نیا ڈرافٹ تیار کریں</button>
+        </div>
+
+        <div id="studioDncBanner" class="notice-danger hidden" data-i18n="doNotContactWarning">
+          انتباہ: اس لیڈ کی اجازت 'رابطہ نہ کریں' پر سیٹ ہے۔
+        </div>
+
+        <label class="field-lbl" for="studioEmailSubject" data-i18n="emailSubjectLabel">ای میل کا عنوان</label>
+        <input id="studioEmailSubject" type="text">
+
+        <label class="field-lbl" for="studioDraftBody" data-i18n="draftEditorLabel">تیار کردہ پیغام (قابلِ ترمیم)</label>
+        <textarea id="studioDraftBody" rows="6"></textarea>
+
+        <div class="card" style="background:var(--surface-alt);margin-top:12px;margin-bottom:10px;padding:12px">
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;font-size:13px">
+            <input type="checkbox" id="studioApprovalCheck" onchange="updateStudioActionButtons()" style="width:18px;height:18px">
+            <span data-i18n="approvalCheckboxLabel">میں نے اس پیغام کا مکمل جائزہ لے لیا ہے اور اسے منظور کرتا ہوں</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;margin-top:8px">
+            <input type="checkbox" id="studioLogHistoryCheck" checked style="width:18px;height:18px">
+            <span data-i18n="logToHistoryCheck">رابطہ ہسٹری میں خودکار ریکارڈ کریں</span>
+          </label>
+        </div>
+
+        <div class="item-actions">
+          <button class="btn-success" id="studioWaBtn" onclick="sendStudioWhatsApp()" disabled data-i18n="openWhatsApp">واٹس ایپ میں کھولیں</button>
+          <button class="btn-primary" id="studioEmailBtn" onclick="sendStudioEmail()" disabled data-i18n="openEmail">ای میل میں کھولیں</button>
+          <button class="btn-soft" id="studioCopyBtn" onclick="copyStudioDraft()" data-i18n="copyMessage">کاپی کریں</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: OFFICIAL PRODUCTS & NEED CALCULATOR -->
+    <section id="tab-products" class="tab-page hidden">
+      <div class="card">
+        <div class="card-title" data-i18n="needCalcTitle">کلائنٹ نیڈ اینالسس کیلکولیٹر</div>
+        <p class="muted" style="margin-top:0" data-i18n="needCalcSubtitle">ماہانہ بچت، مدت اور خاندانی ہدف درج کر کے موزوں سرکاری عسکری تکافل پلان تجویز کریں۔</p>
+        <div class="grid-3">
+          <div>
+            <label class="field-lbl" for="calcBudget" data-i18n="needCalcMonthlyLabel">ماہانہ بچت (روپے PKR)</label>
+            <input id="calcBudget" type="number" min="5000" step="1000" value="25000" class="ltr-input" oninput="runCalculator()">
+          </div>
+          <div>
+            <label class="field-lbl" for="calcYears" data-i18n="needCalcYearsLabel">مدت (سال)</label>
+            <input id="calcYears" type="number" min="3" max="30" value="15" class="ltr-input" oninput="runCalculator()">
+          </div>
+          <div>
+            <label class="field-lbl" for="calcDependents" data-i18n="needCalcDependentsLabel">زیرِ کفالت افراد</label>
+            <input id="calcDependents" type="number" min="0" max="15" value="3" class="ltr-input" oninput="runCalculator()">
+          </div>
+        </div>
+        <div class="chip-row" style="margin-top:8px">
+          <button class="chip" onclick="setCalcYears(3)">3y</button>
+          <button class="chip" onclick="setCalcYears(5)">5y</button>
+          <button class="chip" onclick="setCalcYears(10)">10y</button>
+          <button class="chip" onclick="setCalcYears(15)">15y</button>
+          <button class="chip" onclick="setCalcYears(20)">20y</button>
+          <button class="chip" onclick="setCalcYears(25)">25y</button>
+          <button class="chip" onclick="setCalcYears(30)">30y</button>
+        </div>
+        <label class="field-lbl" for="calcGoal" data-i18n="needCalcGoalLabel">بنیادی خاندانی ہدف</label>
+        <select id="calcGoal" onchange="runCalculator()">
+          <option value="FAMILY_PROTECTION">Family Protection / خاندانی مالی تحفظ</option>
+          <option value="CHILD_EDUCATION">Child Education / بچوں کی تعلیم</option>
+          <option value="CHILD_MARRIAGE">Marriage Planning / بچوں کی شادی</option>
+          <option value="RETIREMENT">Retirement Reserve / ریٹائرمنٹ اور پُرسکون کل</option>
+          <option value="LONG_TERM_WEALTH">Executive Wealth Reserve / طویل مدتی بچت اور اثاثہ</option>
+        </select>
+
+        <div id="calcOutput" style="margin-top:14px"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">
+          <span data-i18n="productsTitle">سرکاری پروڈکٹ لائبریری</span>
+          <a class="btn-outline btn-sm" style="text-decoration:none" href="https://askarilife.com/individual-family-takaful/" target="_blank" rel="noopener noreferrer" data-i18n="openOfficialPortal">سرکاری ویب سائٹ کھولیں</a>
+        </div>
+        <div class="notice" data-i18n="productsGlobalDisclaimer">
+          اہم تنبیہ: یہاں صرف عسکری فیملی تکافل کے سات سرکاری پلانز کے نام درج ہیں۔ منافع، فوائد، کنٹری بیوشن یا شرائط کی تصدیق صرف askarilife.com سے کریں۔
+        </div>
+        <div id="productsListContainer"></div>
+      </div>
+    </section>
+
+    <!-- TAB 6: FOLLOW-UPS & HISTORY -->
+    <section id="tab-followups" class="tab-page hidden">
+      <div class="card">
+        <div class="card-title">
+          <span data-i18n="followUpsTitle">فالو اپ مینیجر</span>
+          <button class="btn-outline btn-sm" id="followUpsPrintBtn" onclick="printSummary()" data-i18n="printSummary">خلاصہ پرنٹ کریں</button>
+        </div>
+        <div class="chip-row" id="followUpTabsRow">
+          <button class="chip active" data-ftab="due" onclick="setFollowUpTab('due')" data-i18n="dueOverdueTab">واجب الادا</button>
+          <button class="chip" data-ftab="upcoming" onclick="setFollowUpTab('upcoming')" data-i18n="upcomingTab">آنے والے</button>
+          <button class="chip" data-ftab="completed" onclick="setFollowUpTab('completed')" data-i18n="completedTab">مکمل</button>
+        </div>
+        <div id="followUpsListContainer"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="bottom-nav" id="bottomTabs">
+    <button class="active" data-tab="dashboard" onclick="switchTab('dashboard')"><span class="ico">📊</span><span data-i18n="navDashboard">ڈیش بورڈ</span></button>
+    <button data-tab="search" onclick="switchTab('search')"><span class="ico">🔎</span><span data-i18n="navSearch">تلاش</span></button>
+    <button data-tab="leads" onclick="switchTab('leads')"><span class="ico">👥</span><span data-i18n="navLeads">لیڈز</span></button>
+    <button data-tab="studio" onclick="switchTab('studio')"><span class="ico">💬</span><span data-i18n="navStudio">میسج</span></button>
+    <button data-tab="products" onclick="switchTab('products')"><span class="ico">🛡️</span><span data-i18n="navProducts">پروڈکٹس</span></button>
+    <button data-tab="followups" onclick="switchTab('followups')"><span class="ico">📅</span><span data-i18n="navFollowUps">فالو اپ</span></button>
+  </nav>
+
+  <!-- LEAD EDITOR MODAL -->
+  <div id="leadModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="leadModalTitle">Lead</h3>
+        <button class="btn-soft btn-sm" onclick="closeModal('leadModal')">✕</button>
+      </div>
+      <form id="leadForm" onsubmit="saveLeadForm(event)">
+        <input type="hidden" id="lfId">
+        <div class="grid-2">
+          <div>
+            <label class="field-lbl" for="lfName" data-i18n="fieldNameReq">پراسپیکٹ کا نام *</label>
+            <input id="lfName" type="text" required>
+          </div>
+          <div>
+            <label class="field-lbl" for="lfCity" data-i18n="fieldCityReq">شہر *</label>
+            <input id="lfCity" type="text" value="Islamabad" required>
+          </div>
+          <div>
+            <label class="field-lbl" for="lfCompany" data-i18n="fieldCompany">کمپنی / ادارہ</label>
+            <input id="lfCompany" type="text">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfDesignation" data-i18n="fieldDesignation">عہدہ</label>
+            <input id="lfDesignation" type="text">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfIndustry" data-i18n="fieldIndustry">انڈسٹری / شعبہ</label>
+            <input id="lfIndustry" type="text">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfPhone" data-i18n="fieldPhone">فون / واٹس ایپ</label>
+            <input id="lfPhone" type="tel" class="ltr-input" placeholder="+923001234567">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfEmail" data-i18n="fieldEmail">ای میل</label>
+            <input id="lfEmail" type="email" class="ltr-input" placeholder="name@company.com">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfFollowUp" data-i18n="fieldFollowUpDate">فالو اپ کی تاریخ</label>
+            <input id="lfFollowUp" type="date" class="ltr-input">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfStatus" data-i18n="fieldLeadStatus">لیڈ اسٹیٹس</label>
+            <select id="lfStatus">
+              <option value="NEW">New Prospect / نیا ممکنہ کلائنٹ</option>
+              <option value="CONTACTED">Contacted / رابطہ ہو چکا</option>
+              <option value="INTERESTED">Interested / دلچسپی رکھتے ہیں</option>
+              <option value="FOLLOW_UP">Follow-up Scheduled / فالو اپ مقرر</option>
+              <option value="COMPLETED">Completed Sale / مکمل فروخت</option>
+              <option value="ARCHIVED">Archived / محفوظ شدہ</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl" for="lfPerm" data-i18n="fieldPermissionStatus">رابطے کی اجازت کی حیثیت</label>
+            <select id="lfPerm">
+              <option value="VERIFIED_PUBLIC">Verified Public Info / تصدیق شدہ عوامی معلومات</option>
+              <option value="CONSENT_OBTAINED">Direct Consent Obtained / براہِ راست اجازت حاصل</option>
+              <option value="REFERRAL_INTRO">Warm Referral Intro / ریفرل تعارف</option>
+              <option value="DO_NOT_CONTACT">Do Not Contact / رابطہ نہ کریں</option>
+            </select>
+          </div>
+          <div>
+            <label class="field-lbl" for="lfWebsite" data-i18n="fieldWebsite">ویب سائٹ لنک</label>
+            <input id="lfWebsite" type="url" class="ltr-input" placeholder="https://...">
+          </div>
+          <div>
+            <label class="field-lbl" for="lfLinkedIn" data-i18n="fieldLinkedIn">لنکڈ اِن لنک</label>
+            <input id="lfLinkedIn" type="url" class="ltr-input" placeholder="https://linkedin.com/in/...">
+          </div>
+        </div>
+        <label class="field-lbl" for="lfSource" data-i18n="fieldSource">ماخذ</label>
+        <input id="lfSource" type="text" value="Public Search">
+        <label class="field-lbl" for="lfNotes" data-i18n="fieldNotes">نوٹس</label>
+        <textarea id="lfNotes"></textarea>
+        <div id="leadFormErr" class="notice-danger hidden" style="margin-top:10px"></div>
+        <div class="item-actions" style="justify-content:flex-end">
+          <button type="button" class="btn-soft" onclick="closeModal('leadModal')" data-i18n="cancel">منسوخ</button>
+          <button type="submit" class="btn-primary" data-i18n="save">محفوظ کریں</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- QUICK PROSPECT MODAL -->
+  <div id="prospectModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="prospectModalTitle" data-i18n="addNewProspectTitle">نیا پراسپیکٹ شامل کریں</h3>
+        <button class="btn-soft btn-sm" onclick="closeModal('prospectModal')">✕</button>
+      </div>
+      <form onsubmit="saveProspectForm(event)">
+        <input type="hidden" id="pfId">
+        <label class="field-lbl" for="pfName" data-i18n="fieldNameReq">نام *</label>
+        <input id="pfName" type="text" required>
+        <label class="field-lbl" for="pfContact" data-i18n="prospectContactLabel">رابطہ نمبر یا ای میل</label>
+        <input id="pfContact" type="text" class="ltr-input" placeholder="+923001234567 or email@domain.com">
+        <label class="field-lbl" for="pfStatus" data-i18n="prospectStatusLabel">اسٹیٹس</label>
+        <input id="pfStatus" type="text" value="New Prospect">
+        <label class="field-lbl" for="pfNotes" data-i18n="prospectNotesLabel">نوٹس</label>
+        <textarea id="pfNotes"></textarea>
+        <div id="prospectFormErr" class="notice-danger hidden" style="margin-top:10px"></div>
+        <div class="item-actions" style="justify-content:flex-end">
+          <button type="button" class="btn-soft" onclick="closeModal('prospectModal')" data-i18n="cancel">منسوخ</button>
+          <button type="submit" class="btn-primary" data-i18n="save">محفوظ کریں</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TARGETS MODAL -->
+  <div id="targetsModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 data-i18n="monthlyTargetsTitle">ماہانہ جی ایم سیلز اہداف</h3>
+        <button class="btn-soft btn-sm" onclick="closeModal('targetsModal')">✕</button>
+      </div>
+      <form onsubmit="saveTargetsForm(event)">
+        <label class="field-lbl" for="tfMonth">Month (YYYY-MM)</label>
+        <input id="tfMonth" type="text" class="ltr-input" required>
+        <label class="field-lbl" for="tfSales" data-i18n="targetSalesLabel">ماہانہ مکمل فروخت کا ہدف</label>
+        <input id="tfSales" type="number" min="1" max="10000" class="ltr-input" required>
+        <label class="field-lbl" for="tfOutreach" data-i18n="targetOutreachLabel">ماہانہ فعال رابطوں کا ہدف</label>
+        <input id="tfOutreach" type="number" min="1" max="10000" class="ltr-input" required>
+        <label class="field-lbl" for="tfReferrals" data-i18n="targetReferralsLabel">ماہانہ ریفرلز کا ہدف</label>
+        <input id="tfReferrals" type="number" min="1" max="10000" class="ltr-input" required>
+        <div class="item-actions" style="justify-content:flex-end">
+          <button type="button" class="btn-soft" onclick="closeModal('targetsModal')" data-i18n="cancel">منسوخ</button>
+          <button type="submit" class="btn-primary" data-i18n="save">محفوظ کریں</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PRODUCT NOTE MODAL -->
+  <div id="productNoteModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="pnTitle">Product Notes</h3>
+        <button class="btn-soft btn-sm" onclick="closeModal('productNoteModal')">✕</button>
+      </div>
+      <form onsubmit="saveProductNoteForm(event)">
+        <input type="hidden" id="pnId">
+        <div class="notice" data-i18n="productNoteWarning">صرف askarilife.com یا منظور شدہ سرکاری بروشرز سے تصدیق شدہ حقائق درج کریں۔</div>
+        <label class="field-lbl" for="pnSummary" data-i18n="productNoteSummaryLabel">تصدیق شدہ سرکاری خلاصہ</label>
+        <textarea id="pnSummary"></textarea>
+        <label class="field-lbl" for="pnEligibility" data-i18n="productNoteEligibilityLabel">تصدیق شدہ اہلیت / اہم سرکاری نکات</label>
+        <textarea id="pnEligibility"></textarea>
+        <label class="field-lbl" for="pnDate" data-i18n="productNoteDateLabel">تصدیق کی تاریخ (YYYY-MM-DD)</label>
+        <input id="pnDate" type="date" class="ltr-input">
+        <label style="display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;font-weight:600">
+          <input type="checkbox" id="pnConfirmed" style="width:18px;height:18px">
+          <span data-i18n="productNoteConfirmCheckbox">میں نے یہ تفصیلات askarilife.com سے تصدیق کی ہیں</span>
+        </label>
+        <div class="item-actions" style="justify-content:flex-end">
+          <button type="button" class="btn-soft" onclick="closeModal('productNoteModal')" data-i18n="cancel">منسوخ</button>
+          <button type="submit" class="btn-primary" data-i18n="save">محفوظ کریں</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONTACT HISTORY & LOG MODAL -->
+  <div id="historyModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="hmTitle">Contact History</h3>
+        <button class="btn-soft btn-sm" onclick="closeModal('historyModal')">✕</button>
+      </div>
+      <form onsubmit="saveHistoryEntry(event)" style="border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:14px">
+        <input type="hidden" id="hmLeadId">
+        <label class="field-lbl" for="hmChannel" data-i18n="channelLabel">ذریعہ رابطہ</label>
+        <select id="hmChannel">
+          <option value="WHATSAPP">WhatsApp / واٹس ایپ</option>
+          <option value="PHONE">Phone Call / فون کال</option>
+          <option value="EMAIL">Email / ای میل</option>
+          <option value="MEETING">Meeting / ملاقات</option>
+          <option value="OTHER">Other / دیگر</option>
+        </select>
+        <label class="field-lbl" for="hmSummary" data-i18n="interactionSummaryLabel">رابطے کا خلاصہ *</label>
+        <input id="hmSummary" type="text" required>
+        <label class="field-lbl" for="hmOutcome" data-i18n="outcomeLabel">نتیجہ / اگلا قدم</label>
+        <input id="hmOutcome" type="text">
+        <div class="item-actions">
+          <button type="submit" class="btn-primary btn-sm" data-i18n="addContactLog">رابطہ درج کریں</button>
+        </div>
+      </form>
+      <div id="hmList"></div>
+    </div>
+  </div>
+
+  <!-- CLOUD SYNC & BACKUP MODAL -->
+  <div id="cloudModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 data-i18n="cloudModalTitle">کلاؤڈ سنک اور ڈیٹا بیک اپ</h3>
+        <button class="btn-soft btn-sm" onclick="closeModal('cloudModal')">✕</button>
+      </div>
+      <div id="cloudAuthBox" class="card" style="background:var(--surface-alt);box-shadow:none">
+        <p style="margin:0 0 8px;font-weight:700" id="cloudUserText">Local Browser Mode (Instant Work)</p>
+        <p class="muted" style="margin:0 0 12px" id="cloudHelpText">
+          آپ کا تمام ڈیٹا فوری طور پر اس براؤزر میں محفوظ ہو رہا ہے۔ اگر آپ اس ویب سائٹ کو GitHub Pages (https://depththeory8-web.github.io) پر چلا رہے ہیں اور Firebase Auth میں ڈومین شامل ہے تو Google Sign-In سے کلاؤڈ فائر اسٹور (auskri-fimly-takaful) کے ساتھ سنک بھی کر سکتے ہیں۔
+        </p>
+        <div class="item-actions">
+          <button class="btn-primary btn-sm" id="googleSignInWebBtn" onclick="signInFirebaseWeb()">Google Sign-In (Cloud Sync)</button>
+          <button class="btn-danger btn-sm hidden" id="googleSignOutWebBtn" onclick="signOutFirebaseWeb()" data-i18n="signOut">سائن آؤٹ</button>
+        </div>
+      </div>
+      <div class="card" style="box-shadow:none">
+        <div class="card-title" data-i18n="backupSectionTitle">JSON بیک اپ اور CSV برآمد</div>
+        <p class="muted" data-i18n="backupSectionDesc">کسی بھی وقت اپنے تمام لیڈز، پراسپیکٹس، ہسٹری اور نوٹس کا مکمل بیک اپ ڈاؤن لوڈ یا بحال کریں۔</p>
+        <div class="item-actions">
+          <button class="btn-gold btn-sm" onclick="downloadJsonBackup()" data-i18n="downloadBackupBtn">مکمل JSON بیک اپ ڈاؤن لوڈ</button>
+          <label class="btn-soft btn-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:9px;min-height:38px;font-weight:600">
+            <span data-i18n="restoreBackupBtn">بیک اپ بحال کریں</span>
+            <input type="file" accept="application/json" onchange="restoreJsonBackup(event)" style="display:none">
+          </label>
+          <button class="btn-outline btn-sm" onclick="exportCsv()" data-i18n="exportCsv">CSV برآمد کریں</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+    const STORAGE_KEY = 'askari_takaful_web_state_v2';
+    const TODAY = () => new Date().toISOString().slice(0, 10);
+    const CURRENT_MONTH = () => new Date().toISOString().slice(0, 7);
+
+    const PRODUCTS = [
+      { id: 'golden_path', en: 'Golden Path', ur: 'گولڈن پاتھ', url: 'https://askarilife.com/individual-family-takaful/' },
+      { id: 'muhafiz', en: 'Muhafiz', ur: 'محافظ', url: 'https://askarilife.com/individual-family-takaful/' },
+      { id: 'iqra', en: 'Iqra', ur: 'اقراء', url: 'https://askarilife.com/individual-family-takaful/' },
+      { id: 'humrahi', en: 'Humrahi', ur: 'ہمراہی', url: 'https://askarilife.com/individual-family-takaful/' },
+      { id: 'pursukoon_kal', en: 'PurSukoon Kal', ur: 'پُرسکون کل', url: 'https://askarilife.com/individual-family-takaful/' },
+      { id: 'sarbuland', en: 'Sarbuland', ur: 'سربلند', url: 'https://askarilife.com/individual-family-takaful/' },
+      { id: 'kanz_ul_askari', en: 'Kanz ul Askari', ur: 'کنز العسکری', url: 'https://askarilife.com/individual-family-takaful/' }
+    ];
+
+    const STATUSES = {
+      NEW: { en: 'New Prospect', ur: 'نیا ممکنہ کلائنٹ', cls: 'badge' },
+      CONTACTED: { en: 'Contacted', ur: 'رابطہ ہو چکا', cls: 'badge-gold' },
+      INTERESTED: { en: 'Interested', ur: 'دلچسپی رکھتے ہیں', cls: 'badge-amber' },
+      FOLLOW_UP: { en: 'Follow-up Scheduled', ur: 'فالو اپ مقرر', cls: 'badge-amber' },
+      COMPLETED: { en: 'Completed Sale', ur: 'مکمل فروخت', cls: 'badge-green' },
+      ARCHIVED: { en: 'Archived', ur: 'محفوظ شدہ', cls: 'badge' }
+    };
+
+    const PERMS = {
+      VERIFIED_PUBLIC: { en: 'Verified Public Info', ur: 'تصدیق شدہ عوامی معلومات' },
+      CONSENT_OBTAINED: { en: 'Direct Consent', ur: 'براہِ راست اجازت' },
+      REFERRAL_INTRO: { en: 'Warm Referral', ur: 'ریفرل تعارف' },
+      DO_NOT_CONTACT: { en: 'Do Not Contact', ur: 'رابطہ نہ کریں' }
+    };
+
+    const I18N = {
+      ur: {
+        hdrTitle: 'عسکری فیملی تکافل سیلز اسسٹنٹ',
+        hdrSubtitle: 'جنرل منیجر • اسلام آباد • +92 316 0894696',
+        langBtn: 'English',
+        navDashboard: 'ڈیش بورڈ',
+        navSearch: 'تلاش',
+        navLeads: 'لیڈز',
+        navStudio: 'میسج اسٹوڈیو',
+        navProducts: 'پروڈکٹس',
+        navFollowUps: 'فالو اپ',
+        executiveBriefTitle: 'ایگزیکٹو سیلز جائزہ',
+        addLead: 'نئی لیڈ شامل کریں',
+        exportCsv: 'CSV برآمد کریں',
+        monthlyTargetsTitle: 'ماہانہ جی ایم سیلز اہداف و ریفرل ٹریکر',
+        editTargetsButton: 'اہداف بدلیں',
+        dueFollowUpsTitle: 'آج اور بقایا فالو اپس',
+        quickActionsTitle: 'فوری اقدامات',
+        cloudBackupBtn: 'کلاؤڈ سنک اور JSON بیک اپ',
+        prospectSearchTitle: 'پبلک پراسپیکٹ سرچ',
+        prospectSearchCompliance: 'یہ سیکشن صرف عوامی گوگل اور بنگ سرچ لنکس بناتا ہے۔ سرچ لنکس تصدیق شدہ لیڈز نہیں ہیں—براؤزر میں معلومات کی تصدیق کے بعد ہی لیڈ محفوظ کریں۔',
+        cityLabel: 'شہر (مارکیٹ)',
+        industryLabel: 'انڈسٹری / کاروبار کی نوعیت',
+        designationLabel: 'فیصلہ ساز عہدہ',
+        keywordLabel: 'اضافی الفاظ (اختیاری)',
+        openGoogleSearch: 'گوگل سرچ کھولیں',
+        openBingSearch: 'بنگ سرچ کھولیں',
+        openLinkedInSearch: 'لنکڈ اِن سرچ (گوگل)',
+        saveDiscoveredLead: 'تصدیق شدہ لیڈ محفوظ کریں',
+        searchVsVerifiedHint: 'نوٹ: کوئی جعلی نام یا نمبر خود سے نہیں بنایا جاتا۔',
+        leadsTitle: 'لیڈ مینجمنٹ',
+        addNewProspectTitle: 'نیا پراسپیکٹ شامل کریں',
+        quickProspectsHeading: 'فوری پراسپیکٹس (Quick Prospects)',
+        saveProspectButton: 'پراسپیکٹ شامل کریں',
+        studioTitle: 'میسج اسٹوڈیو',
+        studioSubtitle: 'اردو اور انگریزی پیشہ ورانہ پیغامات تیار کریں۔ واٹس ایپ یا ای میل کھولنے سے پہلے آپ کی منظوری لازمی ہے۔',
+        selectLeadLabel: 'محفوظ لیڈ منتخب کریں',
+        customProspectOption: 'نام (کسٹم یا منتخب شدہ)',
+        messageTypeLabel: 'پیغام کی قسم',
+        messageLanguageLabel: 'پیغام کی زبان',
+        productFocusLabel: 'متعلقہ تکافل پلان',
+        objectionPresetLabel: 'کلائنٹ کا عام اعتراض',
+        extraContextLabel: 'اضافی ہدایات یا پس منظر',
+        rebuildDraftBtn: 'نیا ڈرافٹ تیار کریں',
+        doNotContactWarning: 'انتباہ: اس لیڈ کی اجازت "رابطہ نہ کریں" پر سیٹ ہے۔',
+        emailSubjectLabel: 'ای میل کا عنوان',
+        draftEditorLabel: 'تیار کردہ پیغام (قابلِ ترمیم)',
+        approvalCheckboxLabel: 'میں نے اس پیغام کا مکمل جائزہ لے لیا ہے اور اسے منظور کرتا ہوں',
+        logToHistoryCheck: 'رابطہ ہسٹری میں خودکار ریکارڈ کریں',
+        openWhatsApp: 'واٹس ایپ میں کھولیں',
+        openEmail: 'ای میل میں کھولیں',
+        copyMessage: 'کاپی کریں',
+        needCalcTitle: 'کلائنٹ نیڈ اینالسس کیلکولیٹر',
+        needCalcSubtitle: 'ماہانہ بچت، مدت اور خاندانی ہدف درج کر کے موزوں سرکاری عسکری تکافل پلان تجویز کریں۔',
+        needCalcMonthlyLabel: 'ماہانہ بچت (روپے PKR)',
+        needCalcYearsLabel: 'مدت (سال)',
+        needCalcDependentsLabel: 'زیرِ کفالت افراد',
+        needCalcGoalLabel: 'بنیادی خاندانی ہدف',
+        productsTitle: 'سرکاری پروڈکٹ لائبریری',
+        openOfficialPortal: 'سرکاری ویب سائٹ کھولیں',
+        productsGlobalDisclaimer: 'اہم تنبیہ: یہاں صرف عسکری فیملی تکافل کے سات سرکاری پلانز کے نام درج ہیں۔ منافع، فوائد، کنٹری بیوشن یا شرائط کی تصدیق صرف askarilife.com سے کریں۔',
+        followUpsTitle: 'فالو اپ مینیجر',
+        dueOverdueTab: 'واجب الادا',
+        upcomingTab: 'آنے والے',
+        completedTab: 'مکمل',
+        fieldNameReq: 'پراسپیکٹ کا نام *',
+        fieldCityReq: 'شہر *',
+        fieldCompany: 'کمپنی / ادارہ',
+        fieldDesignation: 'عہدہ',
+        fieldIndustry: 'انڈسٹری / شعبہ',
+        fieldPhone: 'فون / واٹس ایپ',
+        fieldEmail: 'ای میل',
+        fieldFollowUpDate: 'فالو اپ کی تاریخ',
+        fieldLeadStatus: 'لیڈ اسٹیٹس',
+        fieldPermissionStatus: 'رابطے کی اجازت کی حیثیت',
+        fieldWebsite: 'ویب سائٹ لنک',
+        fieldLinkedIn: 'لنکڈ اِن لنک',
+        fieldSource: 'ماخذ',
+        fieldNotes: 'نوٹس',
+        cancel: 'منسوخ',
+        save: 'محفوظ کریں',
+        prospectContactLabel: 'رابطہ نمبر یا ای میل',
+        prospectStatusLabel: 'اسٹیٹس',
+        prospectNotesLabel: 'نوٹس',
+        targetSalesLabel: 'ماہانہ مکمل فروخت کا ہدف',
+        targetOutreachLabel: 'ماہانہ فعال رابطوں کا ہدف',
+        targetReferralsLabel: 'ماہانہ ریفرلز کا ہدف',
+        productNoteWarning: 'صرف askarilife.com یا منظور شدہ سرکاری بروشرز سے تصدیق شدہ حقائق درج کریں۔',
+        productNoteSummaryLabel: 'تصدیق شدہ سرکاری خلاصہ',
+        productNoteEligibilityLabel: 'تصدیق شدہ اہلیت / اہم سرکاری نکات',
+        productNoteDateLabel: 'تصدیق کی تاریخ (YYYY-MM-DD)',
+        productNoteConfirmCheckbox: 'میں نے یہ تفصیلات askarilife.com سے تصدیق کی ہیں',
+        channelLabel: 'ذریعہ رابطہ',
+        interactionSummaryLabel: 'رابطے کا خلاصہ *',
+        outcomeLabel: 'نتیجہ / اگلا قدم',
+        addContactLog: 'رابطہ درج کریں',
+        cloudModalTitle: 'کلاؤڈ سنک اور ڈیٹا بیک اپ',
+        signOut: 'سائن آؤٹ',
+        backupSectionTitle: 'JSON بیک اپ اور CSV برآمد',
+        backupSectionDesc: 'کسی بھی وقت اپنے تمام لیڈز، پراسپیکٹس، ہسٹری اور نوٹس کا مکمل بیک اپ ڈاؤن لوڈ یا بحال کریں۔',
+        downloadBackupBtn: 'مکمل JSON بیک اپ ڈاؤن لوڈ',
+        restoreBackupBtn: 'بیک اپ بحال کریں',
+        metricTotalLeads: 'کل لیڈز',
+        metricNewProspects: 'نئے پراسپیکٹس',
+        metricContacted: 'رابطہ شدہ',
+        metricInterested: 'دلچسپی رکھنے والے',
+        metricFollowUpsDue: 'واجب الادا فالو اپ',
+        metricCompletedSales: 'مکمل فروخت',
+        allFilter: 'تمام',
+        noLeadsYet: 'ابھی تک کوئی محفوظ لیڈ نہیں ہے۔ اوپر بٹن سے نئی لیڈ شامل کریں۔',
+        noFollowUpsDue: 'فی الحال کوئی فالو اپ باقی نہیں ہے۔',
+        localModeShort: 'براؤزر اسٹوریج فعال',
+        printSummary: 'خلاصہ پرنٹ کریں'
+      },
+      en: {
+        hdrTitle: 'Askari Family Takaful Sales Assistant',
+        hdrSubtitle: 'General Manager • Islamabad • +92 316 0894696',
+        langBtn: 'اردو',
+        navDashboard: 'Dashboard',
+        navSearch: 'Search',
+        navLeads: 'Leads',
+        navStudio: 'Messages',
+        navProducts: 'Products',
+        navFollowUps: 'Follow-ups',
+        executiveBriefTitle: 'Executive Pipeline Overview',
+        addLead: 'Add Lead',
+        exportCsv: 'Export CSV',
+        monthlyTargetsTitle: 'Monthly GM Targets & Referral Tracker',
+        editTargetsButton: 'Edit Targets',
+        dueFollowUpsTitle: 'Due & Overdue Follow-ups',
+        quickActionsTitle: 'Quick Actions',
+        cloudBackupBtn: 'Cloud Sync & JSON Backup',
+        prospectSearchTitle: 'Public Prospect Search',
+        prospectSearchCompliance: 'Generates targeted public Google & Bing search links only. Search links are NOT verified leads—review public sources in your browser before saving a lead.',
+        cityLabel: 'City (Market)',
+        industryLabel: 'Industry / Business Type',
+        designationLabel: 'Decision-Maker Designation',
+        keywordLabel: 'Additional Keywords (Optional)',
+        openGoogleSearch: 'Open Google Search',
+        openBingSearch: 'Open Bing Search',
+        openLinkedInSearch: 'LinkedIn via Google',
+        saveDiscoveredLead: 'Save Verified Lead',
+        searchVsVerifiedHint: 'Zero fabrication: no synthetic people or phone numbers are generated.',
+        leadsTitle: 'Lead Management',
+        addNewProspectTitle: 'Add Quick Prospect',
+        quickProspectsHeading: 'Quick Prospects',
+        saveProspectButton: 'Add Prospect',
+        studioTitle: 'Message Studio',
+        studioSubtitle: 'Prepare bilingual Urdu & English outreach drafts. Review and approve the message before opening WhatsApp or Email.',
+        selectLeadLabel: 'Select Saved Lead',
+        customProspectOption: 'Name (Selected or Custom)',
+        messageTypeLabel: 'Message Type',
+        messageLanguageLabel: 'Message Language',
+        productFocusLabel: 'Product Focus',
+        objectionPresetLabel: 'Client Objection Topic',
+        extraContextLabel: 'Extra Context / Notes',
+        rebuildDraftBtn: 'Regenerate Draft',
+        doNotContactWarning: 'Warning: This lead is marked "Do Not Contact".',
+        emailSubjectLabel: 'Email Subject',
+        draftEditorLabel: 'Draft Message (Editable)',
+        approvalCheckboxLabel: 'I have reviewed and approved this message',
+        logToHistoryCheck: 'Log outreach to Contact History',
+        openWhatsApp: 'Open WhatsApp',
+        openEmail: 'Open Email',
+        copyMessage: 'Copy',
+        needCalcTitle: 'Client Need-Analysis Calculator',
+        needCalcSubtitle: 'Match client monthly budget, horizon, and family goals to an official Askari Family Takaful plan.',
+        needCalcMonthlyLabel: 'Monthly Budget (PKR)',
+        needCalcYearsLabel: 'Horizon (Years)',
+        needCalcDependentsLabel: 'Dependents',
+        needCalcGoalLabel: 'Primary Family / Financial Goal',
+        productsTitle: 'Official Product Library',
+        openOfficialPortal: 'Open Official Portal',
+        productsGlobalDisclaimer: 'Verification Notice: Only official Askari Family Takaful plan names are preloaded. Benefits, returns, contributions, and exclusions are NOT invented—verify at askarilife.com before quoting.',
+        followUpsTitle: 'Follow-up Manager',
+        dueOverdueTab: 'Due / Overdue',
+        upcomingTab: 'Upcoming',
+        completedTab: 'Completed',
+        fieldNameReq: 'Prospect Name *',
+        fieldCityReq: 'City *',
+        fieldCompany: 'Company / Organization',
+        fieldDesignation: 'Designation',
+        fieldIndustry: 'Industry',
+        fieldPhone: 'Phone / WhatsApp',
+        fieldEmail: 'Email',
+        fieldFollowUpDate: 'Follow-up Date',
+        fieldLeadStatus: 'Lead Status',
+        fieldPermissionStatus: 'Permission Status',
+        fieldWebsite: 'Website URL',
+        fieldLinkedIn: 'LinkedIn URL',
+        fieldSource: 'Source',
+        fieldNotes: 'Notes',
+        cancel: 'Cancel',
+        save: 'Save',
+        prospectContactLabel: 'Phone, WhatsApp, or Email',
+        prospectStatusLabel: 'Status',
+        prospectNotesLabel: 'Notes',
+        targetSalesLabel: 'Monthly Completed Sales Target',
+        targetOutreachLabel: 'Monthly Active Outreach Target',
+        targetReferralsLabel: 'Monthly Warm Referrals Target',
+        productNoteWarning: 'Only enter official facts verified directly from askarilife.com or approved brochures.',
+        productNoteSummaryLabel: 'Verified Official Brochure Summary',
+        productNoteEligibilityLabel: 'Verified Eligibility / Key Official Notes',
+        productNoteDateLabel: 'Verification Date (YYYY-MM-DD)',
+        productNoteConfirmCheckbox: 'I verified these details from askarilife.com',
+        channelLabel: 'Channel',
+        interactionSummaryLabel: 'Interaction Summary *',
+        outcomeLabel: 'Outcome / Next Step',
+        addContactLog: 'Log Contact',
+        cloudModalTitle: 'Cloud Sync & Data Backup',
+        signOut: 'Sign Out',
+        backupSectionTitle: 'JSON Backup & CSV Export',
+        backupSectionDesc: 'Download or restore a full JSON backup of all leads, prospects, history, and verified notes anytime.',
+        downloadBackupBtn: 'Download JSON Backup',
+        restoreBackupBtn: 'Restore Backup',
+        metricTotalLeads: 'Total Leads',
+        metricNewProspects: 'New Prospects',
+        metricContacted: 'Contacted',
+        metricInterested: 'Interested',
+        metricFollowUpsDue: 'Follow-ups Due',
+        metricCompletedSales: 'Completed Sales',
+        allFilter: 'All',
+        noLeadsYet: 'No saved leads yet. Tap Add Lead to record a verified prospect.',
+        noFollowUpsDue: 'No follow-ups due right now.',
+        localModeShort: 'Browser Storage Active',
+        printSummary: 'Print Summary'
+      }
+    };
+
+    function defaultState() {
+      return {
+        lang: 'ur',
+        leads: [],
+        prospects: [],
+        history: {},
+        productNotes: {},
+        targets: { targetMonth: CURRENT_MONTH(), salesTarget: 5, outreachTarget: 25, referralTarget: 10 }
+      };
+    }
+
+    var state = defaultState();
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (saved && typeof saved === 'object') {
+        state = Object.assign(defaultState(), saved);
+        if (!state.targets) state.targets = defaultState().targets;
+        if (!state.history) state.history = {};
+        if (!state.productNotes) state.productNotes = {};
+      }
+    } catch (e) {}
+
+    var currentTab = 'dashboard';
+    var leadStatusFilter = 'ALL';
+    var followUpTab = 'due';
+    var cloudSyncApi = null;
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderAll();
+    }
+
+    function t(key) {
+      return (I18N[state.lang] && I18N[state.lang][key]) || I18N.en[key] || key;
+    }
+
+    function esc(s) {
+      return String(s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+    }
+
+    function uid() {
+      return 'id_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 7);
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.add('hidden'), 2600);
+    }
+
+    function toggleLang() {
+      state.lang = state.lang === 'ur' ? 'en' : 'ur';
+      persist();
+    }
+
+    function printSummary() {
+      window.print();
+    }
+
+    function applyTranslations() {
+      const isUrdu = state.lang === 'ur';
+      document.documentElement.lang = isUrdu ? 'ur' : 'en';
+      document.documentElement.dir = isUrdu ? 'rtl' : 'ltr';
+      document.getElementById('hdrTitle').textContent = t('hdrTitle');
+      document.getElementById('hdrSubtitle').textContent = t('hdrSubtitle');
+      document.getElementById('langToggleBtn').textContent = t('langBtn');
+      if (!cloudSyncApi || !cloudSyncApi.user) {
+        document.getElementById('syncLabel').textContent = t('localModeShort');
+      }
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.getAttribute('data-i18n');
+        if (k) el.textContent = t(k);
+      });
+      document.getElementById('leadSearchInput').placeholder = isUrdu
+        ? 'نام، اسٹیٹس، کمپنی یا شہر تلاش کریں...'
+        : 'Search by name, status, company, or city...';
+    }
+
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.tab-page').forEach(p => p.classList.add('hidden'));
+      document.getElementById('tab-' + tab).classList.remove('hidden');
+      document.querySelectorAll('#topTabs .nav-btn, #bottomTabs button').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-tab') === tab);
+      });
+      if (tab === 'studio') populateStudioSelects();
+      if (tab === 'products') runCalculator();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function isLeadDue(lead) {
+      if (!lead.followUpDate || lead.status === 'COMPLETED' || lead.status === 'ARCHIVED') return false;
+      return lead.followUpDate <= TODAY();
+    }
+
+    function renderDashboard() {
+      const leads = state.leads;
+      const metrics = [
+        { key: 'ALL', val: leads.length, lbl: t('metricTotalLeads') },
+        { key: 'NEW', val: leads.filter(x => x.status === 'NEW').length, lbl: t('metricNewProspects') },
+        { key: 'CONTACTED', val: leads.filter(x => x.status === 'CONTACTED').length, lbl: t('metricContacted') },
+        { key: 'INTERESTED', val: leads.filter(x => x.status === 'INTERESTED').length, lbl: t('metricInterested') },
+        { key: 'FOLLOW_UP_DUE', val: leads.filter(isLeadDue).length, lbl: t('metricFollowUpsDue') },
+        { key: 'COMPLETED', val: leads.filter(x => x.status === 'COMPLETED').length, lbl: t('metricCompletedSales') }
+      ];
+      document.getElementById('metricsGrid').innerHTML = metrics.map(m =>
+        `<button class="metric-card" onclick="jumpFromMetric('${m.key}')">
+          <div class="metric-val">${m.val}</div>
+          <div class="metric-lbl">${esc(m.lbl)}</div>
+        </button>`
+      ).join('');
+
+      const tg = state.targets;
+      const completed = leads.filter(x => x.status === 'COMPLETED').length;
+      const outreach = leads.filter(x => ['CONTACTED','INTERESTED','FOLLOW_UP','COMPLETED'].includes(x.status)).length;
+      const referrals = leads.filter(x => x.permissionStatus === 'REFERRAL_INTRO').length;
+      document.getElementById('targetMonthLabel').textContent = (state.lang === 'ur' ? 'ہدف کا مہینہ: ' : 'Target Month: ') + tg.targetMonth;
+      const bars = [
+        { lbl: t('metricCompletedSales'), cur: completed, max: Math.max(1, tg.salesTarget) },
+        { lbl: state.lang === 'ur' ? 'فعال رابطے' : 'Active Outreach', cur: outreach, max: Math.max(1, tg.outreachTarget) },
+        { lbl: state.lang === 'ur' ? 'ریفرل لیڈز' : 'Warm Referrals', cur: referrals, max: Math.max(1, tg.referralTarget) }
+      ];
+      document.getElementById('targetsBars').innerHTML = bars.map(b => {
+        const pct = Math.min(100, Math.round((b.cur / b.max) * 100));
+        return `<div class="item-box" style="margin:0">
+          <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700">
+            <span>${esc(b.lbl)}</span><span>${b.cur} / ${b.max}</span>
+          </div>
+          <div class="progress-wrap"><div class="progress-fill" style="width:${pct}%"></div></div>
+        </div>`;
+      }).join('');
+
+      const due = leads.filter(isLeadDue).slice(0, 5);
+      document.getElementById('dashboardDueList').innerHTML = due.length
+        ? due.map(l => `<div class="item-box">
+            <div class="item-head">
+              <div><strong>${esc(l.name)}</strong><div class="muted">${esc(l.company || l.city)} • ${esc(l.followUpDate)}</div></div>
+              <div style="display:flex;gap:6px">
+                ${l.contactPhone ? `<a class="btn-soft btn-sm" style="text-decoration:none" href="tel:${esc(l.contactPhone)}">📞</a>` : ''}
+                <button class="btn-success btn-sm" onclick="quickWhatsApp('${esc(l.id)}')">WA</button>
+              </div>
+            </div>
+          </div>`).join('')
+        : `<p class="muted">${esc(t('noFollowUpsDue'))}</p>`;
+    }
+
+    function jumpFromMetric(key) {
+      if (key === 'FOLLOW_UP_DUE') {
+        followUpTab = 'due';
+        switchTab('followups');
+      } else {
+        leadStatusFilter = key;
+        switchTab('leads');
+      }
+    }
+
+    // Search Links
+    function setSearchPreset(city, industry, designation) {
+      document.getElementById('searchCity').value = city;
+      document.getElementById('searchIndustry').value = industry;
+      document.getElementById('searchDesignation').value = designation;
+    }
+
+    function openExternalSearch(engine) {
+      const city = document.getElementById('searchCity').value.trim();
+      const ind = document.getElementById('searchIndustry').value.trim();
+      const des = document.getElementById('searchDesignation').value.trim();
+      const kw = document.getElementById('searchKeywords').value.trim();
+      let url = '';
+      if (engine === 'linkedin') {
+        const parts = ['site:linkedin.com/in', des ? `"${des}"` : '', ind, city, kw].filter(Boolean).join(' ');
+        url = 'https://www.google.com/search?q=' + encodeURIComponent(parts);
+      } else {
+        const q = [ind, des, city, kw, 'Pakistan'].filter(Boolean).join(' ');
+        url = (engine === 'bing' ? 'https://www.bing.com/search?q=' : 'https://www.google.com/search?q=') + encodeURIComponent(q);
+      }
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function handoffSearchToLead() {
+      openLeadModal({
+        city: document.getElementById('searchCity').value.trim() || 'Islamabad',
+        industry: document.getElementById('searchIndustry').value.trim(),
+        designation: document.getElementById('searchDesignation').value.trim(),
+        source: 'Public Search'
+      });
+    }
+
+    // Leads & Prospects
+    function renderLeads() {
+      const chips = [{ key: 'ALL', label: t('allFilter') }].concat(
+        Object.keys(STATUSES).map(k => ({ key: k, label: state.lang === 'ur' ? STATUSES[k].ur : STATUSES[k].en }))
+      );
+      document.getElementById('leadFilterChips').innerHTML = chips.map(c =>
+        `<button class="chip ${leadStatusFilter === c.key ? 'active' : ''}" onclick="setLeadFilter('${c.key}')">${esc(c.label)}</button>`
+      ).join('');
+
+      const q = (document.getElementById('leadSearchInput').value || '').trim().toLowerCase();
+      const list = state.leads.filter(l => {
+        if (leadStatusFilter !== 'ALL' && l.status !== leadStatusFilter) return false;
+        if (!q) return true;
+        const st = STATUSES[l.status] || { en: l.status, ur: l.status };
+        const blob = [l.name, l.company, l.designation, l.city, l.industry, l.contactPhone, l.email, st.en, st.ur].join(' ').toLowerCase();
+        return blob.includes(q);
+      });
+
+      document.getElementById('leadsListContainer').innerHTML = list.length
+        ? list.map(l => {
+            const st = STATUSES[l.status] || STATUSES.NEW;
+            const pm = PERMS[l.permissionStatus] || PERMS.VERIFIED_PUBLIC;
+            return `<div class="item-box">
+              <div class="item-head">
+                <div>
+                  <strong style="font-size:15px">${esc(l.name)}</strong>
+                  <div class="muted">${esc([l.designation, l.company, l.city].filter(Boolean).join(' • '))}</div>
+                  <div class="muted">${esc([l.contactPhone, l.email].filter(Boolean).join(' | '))}</div>
+                </div>
+                <span class="${st.cls}">${esc(state.lang === 'ur' ? st.ur : st.en)}</span>
+              </div>
+              <div class="chip-row" style="margin:8px 0 0">
+                <span class="badge">${esc(state.lang === 'ur' ? pm.ur : pm.en)}</span>
+                ${l.followUpDate ? `<span class="badge badge-gold">📅 ${esc(l.followUpDate)}</span>` : ''}
+              </div>
+              ${l.notes ? `<p class="muted" style="margin:8px 0 0">${esc(l.notes)}</p>` : ''}
+              <div class="item-actions">
+                ${l.contactPhone ? `<a class="btn-soft btn-sm" style="text-decoration:none" href="tel:${esc(l.contactPhone)}">📞 ${state.lang === 'ur' ? 'کال' : 'Call'}</a>` : ''}
+                <button class="btn-success btn-sm" onclick="openLeadInStudio('${esc(l.id)}')">💬 ${state.lang === 'ur' ? 'میسج' : 'Message'}</button>
+                <button class="btn-soft btn-sm" onclick="openHistoryModal('${esc(l.id)}')">🕒 ${state.lang === 'ur' ? 'ہسٹری' : 'History'} (${(state.history[l.id] || []).length})</button>
+                <button class="btn-outline btn-sm" onclick="editLeadById('${esc(l.id)}')">✏️ ${state.lang === 'ur' ? 'ترمیم' : 'Edit'}</button>
+                <button class="btn-danger btn-sm" onclick="deleteLeadById('${esc(l.id)}')">🗑️</button>
+              </div>
+            </div>`;
+          }).join('')
+        : `<p class="muted">${esc(t('noLeadsYet'))}</p>`;
+
+      // Quick prospects
+      document.getElementById('prospectsListContainer').innerHTML = state.prospects.length
+        ? state.prospects.map(p => `<div class="item-box">
+            <div class="item-head">
+              <div>
+                <strong>${esc(p.name)}</strong>
+                <div class="muted">${esc(p.contact || '')}</div>
+              </div>
+              <span class="badge">${esc(p.status)}</span>
+            </div>
+            ${p.notes ? `<p class="muted" style="margin:6px 0 0">${esc(p.notes)}</p>` : ''}
+            <div class="item-actions">
+              ${extractPhone(p.contact) ? `<a class="btn-soft btn-sm" style="text-decoration:none" href="tel:${esc(extractPhone(p.contact))}">📞</a>` : ''}
+              <button class="btn-primary btn-sm" onclick="upgradeProspectToLead('${esc(p.id)}')">⬆️ ${state.lang === 'ur' ? 'مکمل لیڈ بنائیں' : 'Upgrade to Lead'}</button>
+              <button class="btn-outline btn-sm" onclick="editProspectById('${esc(p.id)}')">✏️</button>
+              <button class="btn-danger btn-sm" onclick="deleteProspectById('${esc(p.id)}')">🗑️</button>
+            </div>
+          </div>`).join('')
+        : `<p class="muted">${state.lang === 'ur' ? 'کوئی فوری پراسپیکٹ محفوظ نہیں ہے۔' : 'No quick prospects saved yet.'}</p>`;
+    }
+
+    function setLeadFilter(f) { leadStatusFilter = f; renderLeads(); }
+
+    function openLeadModal(prefill) {
+      const l = prefill || {};
+      document.getElementById('leadFormErr').classList.add('hidden');
+      document.getElementById('leadModalTitle').textContent = l.id
+        ? (state.lang === 'ur' ? 'لیڈ میں ترمیم' : 'Edit Lead')
+        : (state.lang === 'ur' ? 'نئی لیڈ شامل کریں' : 'Add Lead');
+      document.getElementById('lfId').value = l.id || '';
+      document.getElementById('lfName').value = l.name || '';
+      document.getElementById('lfCity').value = l.city || 'Islamabad';
+      document.getElementById('lfCompany').value = l.company || '';
+      document.getElementById('lfDesignation').value = l.designation || '';
+      document.getElementById('lfIndustry').value = l.industry || '';
+      document.getElementById('lfPhone').value = l.contactPhone || '';
+      document.getElementById('lfEmail').value = l.email || '';
+      document.getElementById('lfFollowUp').value = l.followUpDate || '';
+      document.getElementById('lfStatus').value = l.status || 'NEW';
+      document.getElementById('lfPerm').value = l.permissionStatus || 'VERIFIED_PUBLIC';
+      document.getElementById('lfWebsite').value = l.website || '';
+      document.getElementById('lfLinkedIn').value = l.linkedInUrl || '';
+      document.getElementById('lfSource').value = l.source || 'Public Search';
+      document.getElementById('lfNotes').value = l.notes || '';
+      document.getElementById('leadModal').classList.remove('hidden');
+    }
+
+    function editLeadById(id) {
+      const l = state.leads.find(x => x.id === id);
+      if (l) openLeadModal(l);
+    }
+
+    function saveLeadForm(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('leadFormErr');
+      const name = document.getElementById('lfName').value.trim();
+      const city = document.getElementById('lfCity').value.trim();
+      const phone = document.getElementById('lfPhone').value.trim();
+      const email = document.getElementById('lfEmail').value.trim();
+      const date = document.getElementById('lfFollowUp').value.trim();
+      const website = document.getElementById('lfWebsite').value.trim();
+      const linkedInUrl = document.getElementById('lfLinkedIn').value.trim();
+
+      if (!name) return showFormErr(errEl, 'Name is required.');
+      if (!city) return showFormErr(errEl, 'City is required.');
+      if (phone && phone.replace(/\D/g, '').length < 7) return showFormErr(errEl, 'Phone must contain at least 7 digits.');
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showFormErr(errEl, 'Enter a valid email address.');
+      if (date && !/^\d{4}-\d{2}-\d{2}$/.test(date)) return showFormErr(errEl, 'Date must be YYYY-MM-DD.');
+      if (website && /\s/.test(website)) return showFormErr(errEl, 'Website URL cannot contain spaces.');
+      if (linkedInUrl && /\s/.test(linkedInUrl)) return showFormErr(errEl, 'LinkedIn URL cannot contain spaces.');
+
+      const id = document.getElementById('lfId').value || uid();
+      const lead = {
+        id,
+        name,
+        city,
+        company: document.getElementById('lfCompany').value.trim(),
+        designation: document.getElementById('lfDesignation').value.trim(),
+        industry: document.getElementById('lfIndustry').value.trim(),
+        contactPhone: phone,
+        email,
+        followUpDate: date,
+        status: document.getElementById('lfStatus').value,
+        permissionStatus: document.getElementById('lfPerm').value,
+        website,
+        linkedInUrl,
+        source: document.getElementById('lfSource').value.trim() || 'Public Search',
+        notes: document.getElementById('lfNotes').value.trim(),
+        updatedAt: Date.now()
+      };
+      const idx = state.leads.findIndex(x => x.id === id);
+      if (idx >= 0) state.leads[idx] = lead; else state.leads.unshift(lead);
+      closeModal('leadModal');
+      persist();
+      if (cloudSyncApi) cloudSyncApi.saveLead(lead);
+      showToast(state.lang === 'ur' ? 'لیڈ محفوظ ہو گئی' : 'Lead saved');
+    }
+
+    function deleteLeadById(id) {
+      if (!confirm(state.lang === 'ur' ? 'کیا آپ واقعی یہ لیڈ حذف کرنا چاہتے ہیں؟' : 'Delete this lead and its contact history?')) return;
+      state.leads = state.leads.filter(x => x.id !== id);
+      delete state.history[id];
+      persist();
+      if (cloudSyncApi) cloudSyncApi.deleteLead(id);
+    }
+
+    function showFormErr(el, msg) {
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+
+    // Quick Prospects
+    function openProspectModal(p) {
+      document.getElementById('prospectFormErr').classList.add('hidden');
+      document.getElementById('pfId').value = p ? p.id : '';
+      document.getElementById('pfName').value = p ? p.name : '';
+      document.getElementById('pfContact').value = p ? (p.contact || '') : '';
+      document.getElementById('pfStatus').value = p ? (p.status || 'New Prospect') : 'New Prospect';
+      document.getElementById('pfNotes').value = p ? (p.notes || '') : '';
+      document.getElementById('prospectModal').classList.remove('hidden');
+    }
+
+    function editProspectById(id) {
+      const p = state.prospects.find(x => x.id === id);
+      if (p) openProspectModal(p);
+    }
+
+    function saveProspectForm(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('prospectFormErr');
+      const name = document.getElementById('pfName').value.trim();
+      const contact = document.getElementById('pfContact').value.trim();
+      const status = document.getElementById('pfStatus').value.trim();
+      if (!name) return showFormErr(errEl, 'Name is required.');
+      if (!status) return showFormErr(errEl, 'Status is required.');
+      if (contact && !extractPhone(contact) && !extractEmail(contact)) {
+        return showFormErr(errEl, 'Enter a valid email or phone (>= 7 digits).');
+      }
+      const id = document.getElementById('pfId').value || uid();
+      const prospect = {
+        id,
+        name,
+        contact,
+        status,
+        notes: document.getElementById('pfNotes').value.trim(),
+        updatedAt: Date.now()
+      };
+      const idx = state.prospects.findIndex(x => x.id === id);
+      if (idx >= 0) state.prospects[idx] = prospect; else state.prospects.unshift(prospect);
+      closeModal('prospectModal');
+      persist();
+      if (cloudSyncApi) cloudSyncApi.saveProspect(prospect);
+      showToast(state.lang === 'ur' ? 'پراسپیکٹ محفوظ ہو گیا' : 'Prospect saved');
+    }
+
+    function deleteProspectById(id) {
+      if (!confirm(state.lang === 'ur' ? 'پراسپیکٹ حذف کریں؟' : 'Delete this prospect?')) return;
+      state.prospects = state.prospects.filter(x => x.id !== id);
+      persist();
+      if (cloudSyncApi) cloudSyncApi.deleteProspect(id);
+    }
+
+    function upgradeProspectToLead(id) {
+      const p = state.prospects.find(x => x.id === id);
+      if (!p) return;
+      openLeadModal({
+        name: p.name,
+        contactPhone: extractPhone(p.contact) || '',
+        email: extractEmail(p.contact) || '',
+        notes: p.notes || '',
+        source: 'Quick Prospect',
+        city: 'Islamabad'
+      });
+    }
+
+    // Message Studio
+    function populateStudioSelects() {
+      const lSel = document.getElementById('studioLeadSelect');
+      const prev = lSel.value;
+      lSel.innerHTML = `<option value="">-- ${esc(t('customProspectOption'))} --</option>` +
+        state.leads.map(l => `<option value="${esc(l.id)}">${esc(l.name)} (${esc(l.city || '')})</option>`).join('');
+      if (prev && state.leads.some(x => x.id === prev)) lSel.value = prev;
+
+      const pSel = document.getElementById('studioProductSelect');
+      const prevP = pSel.value;
+      pSel.innerHTML = PRODUCTS.map(p => `<option value="${p.id}">${esc(p.en + ' / ' + p.ur)}</option>`).join('');
+      if (prevP) pSel.value = prevP;
+      onStudioTypeChange();
+      buildStudioDraft();
+    }
+
+    function onStudioLeadChange() {
+      const id = document.getElementById('studioLeadSelect').value;
+      const lead = state.leads.find(x => x.id === id);
+      if (lead) {
+        document.getElementById('studioCustomName').value = lead.name;
+        document.getElementById('studioDncBanner').classList.toggle('hidden', lead.permissionStatus !== 'DO_NOT_CONTACT');
+      } else {
+        document.getElementById('studioDncBanner').classList.add('hidden');
+      }
+      buildStudioDraft();
+    }
+
+    function onStudioTypeChange() {
+      const showObj = document.getElementById('studioMsgType').value === 'objection';
+      document.getElementById('studioObjectionWrap').classList.toggle('hidden', !showObj);
+      buildStudioDraft();
+    }
+
+    function openLeadInStudio(leadId) {
+      switchTab('studio');
+      document.getElementById('studioLeadSelect').value = leadId;
+      onStudioLeadChange();
+    }
+
+    function buildStudioDraft() {
+      const name = document.getElementById('studioCustomName').value.trim() || (state.lang === 'ur' ? 'محترم' : 'Sir/Madam');
+      const msgType = document.getElementById('studioMsgType').value;
+      const msgLang = document.getElementById('studioMsgLang').value;
+      const prodId = document.getElementById('studioProductSelect').value || 'golden_path';
+      const prod = PRODUCTS.find(p => p.id === prodId) || PRODUCTS[0];
+      const extra = document.getElementById('studioExtraContext').value.trim();
+      const obj = document.getElementById('studioObjectionSelect').value;
+
+      let subject = '';
+      let body = '';
+      if (msgLang === 'ur') {
+        subject = `عسکری فیملی تکافل - ${prod.ur} کے حوالے سے مشاورت`;
+        const map = {
+          intro: `السلام علیکم ${name} صاحب/صاحبہ،\n\nمیں جنرل منیجر، عسکری فیملی تکافل (اسلام آباد) کی طرف سے رابطہ کر رہا ہوں۔ خاندان کے مالی تحفظ اور بچوں کے مستقبل کے لیے ہمارا "${prod.ur}" (${prod.en}) پلان ایک شرعی اور منظم حل فراہم کرتا ہے۔\n\nاگر آپ مناسب سمجھیں تو میں مختصر تعارفی گفتگو کا وقت طے کر سکتا ہوں۔\n\nوالسلام،\nجنرل منیجر | عسکری فیملی تکافل\nواٹس ایپ: +923160894696\nسرکاری تفصیلات: https://askarilife.com/individual-family-takaful/`,
+          followup: `السلام علیکم ${name} صاحب/صاحبہ،\n\nامید ہے آپ خیریت سے ہوں گے۔ "${prod.ur}" پلان کے حوالے سے ہماری گزشتہ بات چیت پر فالو اپ کر رہا ہوں۔ اگر کوئی سوال ہو یا میٹنگ کا وقت طے کرنا ہو تو ضرور آگاہ فرمائیں۔\n\nوالسلام،\nجنرل منیجر • عسکری فیملی تکافل\n+923160894696`,
+          meeting: `السلام علیکم ${name} صاحب/صاحبہ،\n\nآپ کی سہولت کے مطابق اس ہفتے 15 منٹ کی مختصر میٹنگ یا آن لائن کال کی درخواست ہے تاکہ "${prod.ur}" کی سرکاری تفصیلات پیش کی جا سکیں۔ براہِ کرم مناسب وقت بتا دیں۔\n\nواٹس ایپ: +923160894696`,
+          referral: `السلام علیکم ${name} صاحب/صاحبہ،\n\nآپ کے اعتماد کا بے حد شکریہ۔ اگر آپ کے حلقہ احباب یا کاروباری ساتھیوں میں سے کوئی فیملی تکافل اور بچوں کی تعلیمی بچت میں دلچسپی رکھتا ہو تو براہِ کرم تعارف کروائیں۔\n\nشکریہ، جنرل منیجر • عسکری فیملی تکافل (+923160894696)`,
+          thanks: `محترم ${name} صاحب/صاحبہ،\n\nاپنا قیمتی وقت دینے کا بہت شکریہ۔ کسی بھی مزید سرکاری معلومات یا بروشر کے لیے آپ مجھ سے +923160894696 پر رابطہ کر سکتے ہیں۔`,
+          objection: {
+            shariah: `السلام علیکم ${name} صاحب/صاحبہ،\n\nعسکری فیملی تکافل کے تمام پلانز مستند شریعہ ایڈوائزری بورڈ کی نگرانی میں اسلامی تکافل اصولوں کے مطابق مرتب کیے جاتے ہیں۔ سرکاری شریعہ سرٹیفکیٹ اور تفصیلات askarilife.com پر دستیاب ہیں۔\n\n+923160894696`,
+            budget: `السلام علیکم ${name} صاحب/صاحبہ،\n\n"${prod.ur}" میں آپ اپنی ماہانہ گنجائش کے مطابق مناسب پلان منتخب کر سکتے ہیں۔ ہم پہلے آپ کے موجودہ بجٹ کے مطابق سادہ منصوبہ بندی دیکھ لیتے ہیں، کوئی فوری دباؤ نہیں۔\n\n+923160894696`,
+            think: `السلام علیکم ${name} صاحب/صاحبہ،\n\nبالکل، خاندان کے مالی فیصلے کے لیے سوچ بچار ضروری ہے۔ میں آپ کو "${prod.ur}" کا سرکاری لنک بھیج رہا ہوں (askarilife.com) تاکہ آپ اطمینان سے دیکھ لیں۔ چند روز بعد دوبارہ رابطہ کروں گا۔\n\n+923160894696`,
+            existing: `السلام علیکم ${name} صاحب/صاحبہ،\n\nماشاءاللہ آپ کا بچت کا نظام موجود ہے؛ تکافل اس بچت کو خاندانی مالی تحفظ کے ساتھ مزید محفوظ بناتا ہے۔ مختصر موازنہ کے لیے وقت دیں تو خوشی ہوگی۔\n\n+923160894696`
+          }[obj]
+        };
+        body = map[msgType] + (extra ? `\n\nنوٹ: ${extra}` : '');
+      } else {
+        subject = `Askari Family Takaful — ${prod.en} Consultation`;
+        const map = {
+          intro: `Assalam-o-Alaikum ${name},\n\nI am reaching out as General Manager at Askari Family Takaful (Islamabad). For structured Shariah-compliant family protection and savings planning, our official "${prod.en}" plan offers strong long-term options.\n\nMay I schedule a brief 15-minute call at your convenience? Official plan overview: https://askarilife.com/individual-family-takaful/\n\nBest regards,\nGeneral Manager | Askari Family Takaful\nWhatsApp: +923160894696`,
+          followup: `Assalam-o-Alaikum ${name},\n\nI hope you are well. Following up on our earlier discussion regarding Askari Family Takaful (${prod.en}). Please let me know a convenient time to answer any questions or share the official brochure.\n\nRegards,\nGeneral Manager | Askari Family Takaful | +923160894696`,
+          meeting: `Assalam-o-Alaikum ${name},\n\nWould you be available for a brief 15-minute consultation this week to review "${prod.en}" options tailored to your family's goals?\n\nWhatsApp: +923160894696`,
+          referral: `Assalam-o-Alaikum ${name},\n\nThank you for your trust in Askari Family Takaful. If any colleague or family member is exploring Shariah-compliant savings or education planning, I would appreciate an introduction.\n\nWarm regards, GM | +923160894696`,
+          thanks: `Dear ${name},\n\nThank you sincerely for your time today. Please feel free to reach me anytime at +923160894696 for official product brochures or clarification.`,
+          objection: {
+            shariah: `Assalam-o-Alaikum ${name},\n\nAskari Family Takaful plans operate under an independent Shariah Supervisory Board and published takaful rules. You can review official Shariah compliance details directly on askarilife.com.\n\nGM | +923160894696`,
+            budget: `Assalam-o-Alaikum ${name},\n\nContribution levels are flexible and planned around your comfortable monthly budget—no fixed pressure. Let's review a realistic benchmark tailored to your comfort.\n\nGM | +923160894696`,
+            think: `Assalam-o-Alaikum ${name},\n\nTake all the time you need—major family financial decisions deserve careful review. Meanwhile, official plan facts are available at https://askarilife.com/individual-family-takaful/. I will check back in a few days.\n\nGM | +923160894696`,
+            existing: `Assalam-o-Alaikum ${name},\n\nHaving existing savings is great—Family Takaful complements your portfolio by adding structured Shariah-compliant protection for dependents. Happy to share a brief comparison anytime.\n\nGM | +923160894696`
+          }[obj]
+        };
+        body = map[msgType] + (extra ? `\n\nContext: ${extra}` : '');
+      }
+      document.getElementById('studioEmailSubject').value = subject;
+      document.getElementById('studioDraftBody').value = body;
+      document.getElementById('studioApprovalCheck').checked = false;
+      updateStudioActionButtons();
+    }
+
+    function updateStudioActionButtons() {
+      const ok = document.getElementById('studioApprovalCheck').checked;
+      document.getElementById('studioWaBtn').disabled = !ok;
+      document.getElementById('studioEmailBtn').disabled = !ok;
+    }
+
+    function maybeLogStudioOutreach(channel) {
+      const id = document.getElementById('studioLeadSelect').value;
+      if (!id || !document.getElementById('studioLogHistoryCheck').checked) return;
+      const body = document.getElementById('studioDraftBody').value.trim();
+      const entry = { id: uid(), channel, summary: body.slice(0, 140), outcome: 'Draft opened via Web Studio', createdAt: Date.now() };
+      state.history[id] = [entry].concat(state.history[id] || []);
+      persist();
+      if (cloudSyncApi) cloudSyncApi.saveHistory(id, entry);
+    }
+
+    function sendStudioWhatsApp() {
+      const id = document.getElementById('studioLeadSelect').value;
+      const lead = state.leads.find(x => x.id === id);
+      const body = document.getElementById('studioDraftBody').value;
+      const cleaned = normalizeWaPhone(lead ? lead.contactPhone : '');
+      maybeLogStudioOutreach('WHATSAPP');
+      const url = cleaned
+        ? `https://wa.me/${cleaned}?text=${encodeURIComponent(body)}`
+        : `https://wa.me/?text=${encodeURIComponent(body)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function sendStudioEmail() {
+      const id = document.getElementById('studioLeadSelect').value;
+      const lead = state.leads.find(x => x.id === id);
+      const email = lead ? (lead.email || '') : '';
+      const sub = document.getElementById('studioEmailSubject').value;
+      const body = document.getElementById('studioDraftBody').value;
+      maybeLogStudioOutreach('EMAIL');
+      window.location.href = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(sub)}&body=${encodeURIComponent(body)}`;
+    }
+
+    async function copyStudioDraft() {
+      const txt = document.getElementById('studioDraftBody').value;
+      try { await navigator.clipboard.writeText(txt); } catch (e) {
+        document.getElementById('studioDraftBody').select();
+        document.execCommand('copy');
+      }
+      showToast(state.lang === 'ur' ? 'پیغام کاپی ہو گیا' : 'Draft copied');
+    }
+
+    // Need Analysis Calculator + Products
+    function setCalcYears(y) {
+      document.getElementById('calcYears').value = y;
+      runCalculator();
+    }
+
+    function runCalculator() {
+      const monthly = Math.max(5000, Math.min(10000000, Number(document.getElementById('calcBudget').value) || 5000));
+      const years = Math.max(3, Math.min(30, Number(document.getElementById('calcYears').value) || 10));
+      const deps = Math.max(0, Math.min(15, Number(document.getElementById('calcDependents').value) || 0));
+      const goal = document.getElementById('calcGoal').value;
+
+      const annual = monthly * 12;
+      const horizonTotal = annual * years;
+      const factor = Math.max(5, Math.min(18, 5 + deps * 2));
+      const benchmark = annual * factor;
+
+      const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+      let primary = byId.sarbuland, secondary = byId.muhafiz;
+      if (goal === 'CHILD_EDUCATION') { primary = byId.iqra; secondary = byId.golden_path; }
+      else if (goal === 'CHILD_MARRIAGE') { primary = byId.humrahi; secondary = byId.iqra; }
+      else if (goal === 'RETIREMENT') { primary = byId.pursukoon_kal; secondary = byId.kanz_ul_askari; }
+      else if (goal === 'FAMILY_PROTECTION') {
+        primary = deps >= 3 ? byId.muhafiz : byId.sarbuland;
+        secondary = primary.id === 'muhafiz' ? byId.sarbuland : byId.muhafiz;
+      } else if (goal === 'LONG_TERM_WEALTH') {
+        primary = (monthly >= 50000 || years >= 12) ? byId.kanz_ul_askari : byId.golden_path;
+        secondary = primary.id === 'kanz_ul_askari' ? byId.golden_path : byId.sarbuland;
+      }
+
+      const fmt = n => 'PKR ' + Number(n).toLocaleString('en-PK');
+      const isUr = state.lang === 'ur';
+      document.getElementById('calcOutput').innerHTML = `
+        <div class="card card-dark" style="margin-bottom:0">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+            <div>
+              <div class="muted">${isUr ? 'تجویز کردہ بنیادی پلان' : 'Recommended Primary Plan'}</div>
+              <div style="font-size:20px;font-weight:800;color:var(--gold-400)">${esc(isUr ? primary.ur + ' (' + primary.en + ')' : primary.en)}</div>
+              <div class="muted">${isUr ? 'متبادل پلان: ' : 'Complementary: '}${esc(isUr ? secondary.ur : secondary.en)}</div>
+            </div>
+            <button class="btn-gold btn-sm" onclick="pitchProduct('${primary.id}')">${isUr ? 'اس پلان کا پیغام بنائیں' : 'Draft Pitch for Plan'}</button>
+          </div>
+          <div class="grid-3" style="margin-top:12px">
+            <div class="item-box" style="margin:0;color:var(--text)"><div class="muted">${isUr ? 'سالانہ بچت' : 'Annual Total'}</div><strong>${fmt(annual)}</strong></div>
+            <div class="item-box" style="margin:0;color:var(--text)"><div class="muted">${isUr ? 'مجموعی مدت کی بچت' : 'Horizon Total'}</div><strong>${fmt(horizonTotal)}</strong></div>
+            <div class="item-box" style="margin:0;color:var(--text)"><div class="muted">${isUr ? 'تحفظ کا عمومی معیار' : 'Protection Benchmark'}</div><strong>${fmt(benchmark)}</strong></div>
+          </div>
+          <p class="muted" style="margin:10px 0 0">${isUr ? 'نوٹ: یہ صرف عمومی مالی منصوبہ بندی کا حساب ہے۔ حتمی شرائط askarilife.com پر تصدیق کریں۔' : 'Planning benchmark only—not an official quote or profit guarantee. Verify official terms on askarilife.com.'}</p>
+        </div>`;
+    }
+
+    function pitchProduct(prodId) {
+      switchTab('studio');
+      document.getElementById('studioProductSelect').value = prodId;
+      buildStudioDraft();
+    }
+
+    function renderProducts() {
+      const isUr = state.lang === 'ur';
+      document.getElementById('productsListContainer').innerHTML = PRODUCTS.map(p => {
+        const note = state.productNotes[p.id];
+        return `<div class="item-box">
+          <div class="item-head">
+            <div>
+              <strong>${esc(p.en)} • ${esc(p.ur)}</strong>
+              <div style="margin-top:4px">${note && note.isVerifiedByUser
+                ? `<span class="badge badge-green">✓ ${isUr ? 'تصدیق شدہ نوٹس محفوظ' : 'Verified Notes Saved'}</span>`
+                : `<span class="badge badge-amber">${isUr ? 'askarilife.com سے تصدیق کریں' : 'Verify on askarilife.com'}</span>`}</div>
+            </div>
+            <button class="btn-soft btn-sm" onclick="openProductNoteModal('${p.id}')">📝 ${isUr ? 'نوٹس' : 'Notes'}</button>
+          </div>
+          ${note && note.verifiedSummary ? `<p class="muted" style="margin:8px 0 0">${esc(note.verifiedSummary)}</p>` : ''}
+        </div>`;
+      }).join('');
+    }
+
+    function openProductNoteModal(id) {
+      const p = PRODUCTS.find(x => x.id === id);
+      const n = state.productNotes[id] || {};
+      document.getElementById('pnId').value = id;
+      document.getElementById('pnTitle').textContent = p.en + ' • ' + p.ur;
+      document.getElementById('pnSummary').value = n.verifiedSummary || '';
+      document.getElementById('pnEligibility').value = n.verifiedEligibility || '';
+      document.getElementById('pnDate').value = n.verifiedSourceDate || TODAY();
+      document.getElementById('pnConfirmed').checked = !!n.isVerifiedByUser;
+      document.getElementById('productNoteModal').classList.remove('hidden');
+    }
+
+    function saveProductNoteForm(e) {
+      e.preventDefault();
+      const id = document.getElementById('pnId').value;
+      const note = {
+        productId: id,
+        verifiedSummary: document.getElementById('pnSummary').value.trim(),
+        verifiedEligibility: document.getElementById('pnEligibility').value.trim(),
+        verifiedSourceDate: document.getElementById('pnDate').value,
+        isVerifiedByUser: document.getElementById('pnConfirmed').checked,
+        updatedAt: Date.now()
+      };
+      state.productNotes[id] = note;
+      closeModal('productNoteModal');
+      persist();
+      if (cloudSyncApi) cloudSyncApi.saveProductNote(note);
+      showToast(state.lang === 'ur' ? 'نوٹس محفوظ ہو گئے' : 'Notes saved');
+    }
+
+    // Follow-ups & History
+    function setFollowUpTab(tab) {
+      followUpTab = tab;
+      document.querySelectorAll('#followUpTabsRow button').forEach(b => b.classList.toggle('active', b.getAttribute('data-ftab') === tab));
+      renderFollowUps();
+    }
+
+    function renderFollowUps() {
+      const today = TODAY();
+      const list = state.leads.filter(l => {
+        if (followUpTab === 'completed') return l.status === 'COMPLETED';
+        if (l.status === 'COMPLETED' || l.status === 'ARCHIVED') return false;
+        if (followUpTab === 'due') return l.followUpDate && l.followUpDate <= today;
+        return !l.followUpDate || l.followUpDate > today;
+      });
+      const isUr = state.lang === 'ur';
+      document.getElementById('followUpsListContainer').innerHTML = list.length
+        ? list.map(l => `<div class="item-box">
+            <div class="item-head">
+              <div>
+                <strong>${esc(l.name)}</strong>
+                <div class="muted">${esc([l.company, l.city, l.followUpDate || (isUr ? 'تاریخ مقرر نہیں' : 'No date')].filter(Boolean).join(' • '))}</div>
+              </div>
+              <span class="${(STATUSES[l.status] || STATUSES.NEW).cls}">${esc(isUr ? (STATUSES[l.status] || STATUSES.NEW).ur : (STATUSES[l.status] || STATUSES.NEW).en)}</span>
+            </div>
+            <div class="item-actions">
+              ${l.contactPhone ? `<a class="btn-soft btn-sm" style="text-decoration:none" href="tel:${esc(l.contactPhone)}">📞 ${isUr ? 'کال' : 'Call'}</a>` : ''}
+              <button class="btn-success btn-sm" onclick="quickWhatsApp('${esc(l.id)}')">WA</button>
+              <button class="btn-soft btn-sm" onclick="downloadIcsReminder('${esc(l.id)}')">📅 ${isUr ? 'کیلنڈر' : 'Calendar'}</button>
+              <button class="btn-outline btn-sm" onclick="openHistoryModal('${esc(l.id)}')">🕒 ${isUr ? 'ہسٹری' : 'History'} (${(state.history[l.id] || []).length})</button>
+              <button class="btn-outline btn-sm" onclick="editLeadById('${esc(l.id)}')">✏️</button>
+            </div>
+          </div>`).join('')
+        : `<p class="muted">${esc(t('noFollowUpsDue'))}</p>`;
+    }
+
+    function quickWhatsApp(id) {
+      const l = state.leads.find(x => x.id === id);
+      if (!l) return;
+      const msg = state.lang === 'ur'
+        ? `السلام علیکم ${l.name}، عسکری فیملی تکافل کی طرف سے فالو اپ کے لیے رابطہ کر رہا ہوں۔`
+        : `Assalam-o-Alaikum ${l.name}, following up from Askari Family Takaful regarding your family financial planning.`;
+      const p = normalizeWaPhone(l.contactPhone);
+      window.open(p ? `https://wa.me/${p}?text=${encodeURIComponent(msg)}` : `https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function downloadIcsReminder(id) {
+      const l = state.leads.find(x => x.id === id);
+      if (!l) return;
+      const d = (l.followUpDate || TODAY()).replace(/-/g, '');
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Askari Family Takaful//GM Assistant//EN',
+        'BEGIN:VEVENT',
+        `UID:${l.id}@askaritakaful`,
+        `DTSTART:${d}T100000`,
+        `DTEND:${d}T103000`,
+        `SUMMARY:Follow up: ${l.name} (${l.company || l.city})`,
+        `DESCRIPTION:Askari Family Takaful Follow-up\\nPhone: ${l.contactPhone || ''}\\nNotes: ${(l.notes || '').replace(/\n/g, ' ')}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([ics], { type: 'text/calendar' }));
+      a.download = `followup-${l.name.replace(/\W+/g, '_')}.ics`;
+      a.click();
+    }
+
+    function openHistoryModal(leadId) {
+      const l = state.leads.find(x => x.id === leadId);
+      document.getElementById('hmLeadId').value = leadId;
+      document.getElementById('hmTitle').textContent = (l ? l.name + ' • ' : '') + (state.lang === 'ur' ? 'رابطہ ہسٹری' : 'Contact History');
+      document.getElementById('hmSummary').value = '';
+      document.getElementById('hmOutcome').value = '';
+      renderHistoryList(leadId);
+      document.getElementById('historyModal').classList.remove('hidden');
+      if (cloudSyncApi && cloudSyncApi.loadHistory) {
+        cloudSyncApi.loadHistory(leadId);
+      }
+    }
+
+    function renderHistoryList(leadId) {
+      const entries = state.history[leadId] || [];
+      document.getElementById('hmList').innerHTML = entries.length
+        ? entries.map(h => `<div class="item-box">
+            <div class="item-head">
+              <div>
+                <span class="badge badge-gold">${esc(h.channel)}</span>
+                <div style="margin-top:6px;font-weight:600">${esc(h.summary)}</div>
+                ${h.outcome ? `<div class="muted">${esc(h.outcome)}</div>` : ''}
+              </div>
+              <button class="btn-danger btn-sm" onclick="deleteHistoryEntry('${esc(leadId)}','${esc(h.id)}')">✕</button>
+            </div>
+          </div>`).join('')
+        : `<p class="muted">${state.lang === 'ur' ? 'ابھی تک کوئی رابطہ ہسٹری درج نہیں۔' : 'No contact history logged yet.'}</p>`;
+    }
+
+    function saveHistoryEntry(e) {
+      e.preventDefault();
+      const leadId = document.getElementById('hmLeadId').value;
+      const summary = document.getElementById('hmSummary').value.trim();
+      if (!summary) return;
+      const entry = {
+        id: uid(),
+        channel: document.getElementById('hmChannel').value,
+        summary,
+        outcome: document.getElementById('hmOutcome').value.trim(),
+        createdAt: Date.now()
+      };
+      state.history[leadId] = [entry].concat(state.history[leadId] || []);
+      persist();
+      renderHistoryList(leadId);
+      document.getElementById('hmSummary').value = '';
+      document.getElementById('hmOutcome').value = '';
+      if (cloudSyncApi) cloudSyncApi.saveHistory(leadId, entry);
+    }
+
+    function deleteHistoryEntry(leadId, entryId) {
+      state.history[leadId] = (state.history[leadId] || []).filter(x => x.id !== entryId);
+      persist();
+      renderHistoryList(leadId);
+      if (cloudSyncApi) cloudSyncApi.deleteHistory(leadId, entryId);
+    }
+
+    // Targets Modal
+    function openTargetsModal() {
+      document.getElementById('tfMonth').value = state.targets.targetMonth || CURRENT_MONTH();
+      document.getElementById('tfSales').value = state.targets.salesTarget || 5;
+      document.getElementById('tfOutreach').value = state.targets.outreachTarget || 25;
+      document.getElementById('tfReferrals').value = state.targets.referralTarget || 10;
+      document.getElementById('targetsModal').classList.remove('hidden');
+    }
+
+    function saveTargetsForm(e) {
+      e.preventDefault();
+      state.targets = {
+        targetMonth: document.getElementById('tfMonth').value.trim() || CURRENT_MONTH(),
+        salesTarget: Math.max(1, Math.min(10000, Number(document.getElementById('tfSales').value) || 5)),
+        outreachTarget: Math.max(1, Math.min(10000, Number(document.getElementById('tfOutreach').value) || 25)),
+        referralTarget: Math.max(1, Math.min(10000, Number(document.getElementById('tfReferrals').value) || 10)),
+        updatedAt: Date.now()
+      };
+      closeModal('targetsModal');
+      persist();
+      if (cloudSyncApi) cloudSyncApi.saveTargets(state.targets);
+      showToast(state.lang === 'ur' ? 'اہداف محفوظ ہو گئے' : 'Targets saved');
+    }
+
+    // CSV & JSON Backup
+    function csvEsc(v) {
+      const s = String(v || '').replace(/\r?\n/g, ' ');
+      return (s.includes(',') || s.includes('"')) ? `"${s.replace(/"/g, '""')}"` : s;
+    }
+
+    function exportCsv() {
+      const headers = ['Name','Company','Designation','City','Industry','Contact Phone','Email','Website','LinkedIn URL','Source','Permission Status','Status','Follow-Up Date','Notes'];
+      const rows = [headers.join(',')];
+      state.leads.forEach(l => rows.push([l.name,l.company,l.designation,l.city,l.industry,l.contactPhone,l.email,l.website,l.linkedInUrl,l.source,l.permissionStatus,l.status,l.followUpDate,l.notes].map(csvEsc).join(',')));
+      state.prospects.forEach(p => rows.push([p.name,'','','','',extractPhone(p.contact)||'',extractEmail(p.contact)||'','','','Quick Prospect','',p.status,'',p.notes].map(csvEsc).join(',')));
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob(['\uFEFF' + rows.join('\n')], { type: 'text/csv;charset=utf-8' }));
+      a.download = `askari_takaful_leads_${TODAY()}.csv`;
+      a.click();
+    }
+
+    function downloadJsonBackup() {
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' }));
+      a.download = `askari_takaful_backup_${TODAY()}.json`;
+      a.click();
+    }
+
+    function restoreJsonBackup(ev) {
+      const f = ev.target.files && ev.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = () => {
+        try {
+          const parsed = JSON.parse(r.result);
+          if (!parsed || !Array.isArray(parsed.leads)) throw new Error('Invalid format');
+          if (confirm(state.lang === 'ur' ? 'موجودہ ڈیٹا اس بیک اپ سے تبدیل کریں؟' : 'Replace current workspace data with this backup?')) {
+            state = Object.assign(defaultState(), parsed);
+            persist();
+            closeModal('cloudModal');
+            showToast(state.lang === 'ur' ? 'بیک اپ بحال ہو گیا' : 'Backup restored');
+          }
+        } catch (err) {
+          alert('Invalid JSON backup file.');
+        }
+      };
+      r.readAsText(f);
+    }
+
+    function openCloudModal() { document.getElementById('cloudModal').classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function extractPhone(str) {
+      const m = String(str || '').match(/\+?[0-9][0-9\s\-()]{6,}[0-9]/);
+      if (!m) return null;
+      const c = m[0].replace(/[^\d+]/g, '');
+      return c.replace(/\D/g, '').length >= 7 ? c : null;
+    }
+
+    function extractEmail(str) {
+      const m = String(str || '').match(/[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}/);
+      return m ? m[0] : null;
+    }
+
+    function normalizeWaPhone(raw) {
+      const d = String(raw || '').replace(/\D/g, '');
+      if (d.startsWith('00')) return d.slice(2);
+      if (d.startsWith('03') && d.length === 11) return '92' + d.slice(1);
+      return d;
+    }
+
+    function renderAll() {
+      applyTranslations();
+      renderDashboard();
+      renderLeads();
+      renderProducts();
+      renderFollowUps();
+    }
+
+    renderAll();
+    runCalculator();
+    populateStudioSelects();
+  </script>
+
+  <!-- Optional Firebase Cloud Sync Module (syncs with auskri-fimly-takaful when hosted on an authorized HTTPS domain) -->
+  <script type="module">
+    const FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDzm-XrlbViyQtSXydnpqyvCRhJxsW30gg",
+      authDomain: "auskri-fimly-takaful.firebaseapp.com",
+      projectId: "auskri-fimly-takaful",
+      storageBucket: "auskri-fimly-takaful.firebasestorage.app",
+      messagingSenderId: "560884538260"
+    };
+    const DATABASE_ID = "ai-studio-android-askarita-7dc545ec-8528-49f4-847e-e991d5fffd45";
+
+    async function initOptionalFirebase() {
+      if (location.protocol === 'file:') return;
+      try {
+        const [{ initializeApp }, authMod, fsMod] = await Promise.all([
+          import('https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js'),
+          import('https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js'),
+          import('https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js')
+        ]);
+        const app = initializeApp(FIREBASE_CONFIG);
+        const auth = authMod.getAuth(app);
+        const db = fsMod.getFirestore(app, DATABASE_ID);
+        let unsubs = [];
+
+        const api = {
+          user: null,
+          async saveLead(l) {
+            if (!this.user) return;
+            const ref = fsMod.doc(db, 'users', this.user.uid, 'leads', l.id);
+            const snap = await fsMod.getDoc(ref);
+            const fields = {
+              name: l.name, company: l.company || '', designation: l.designation || '',
+              city: l.city || 'Islamabad', industry: l.industry || '', contactPhone: l.contactPhone || '',
+              email: l.email || '', website: l.website || '', linkedInUrl: l.linkedInUrl || '',
+              source: l.source || 'Web', notes: l.notes || '', permissionStatus: l.permissionStatus,
+              status: l.status, followUpDate: l.followUpDate || '', updatedAt: fsMod.serverTimestamp()
+            };
+            if (snap.exists()) {
+              await fsMod.updateDoc(ref, fields);
+            } else {
+              await fsMod.setDoc(ref, Object.assign({ userId: this.user.uid, createdAt: fsMod.serverTimestamp() }, fields));
+            }
+          },
+          async deleteLead(id) {
+            if (!this.user) return;
+            const histSnap = await fsMod.getDocs(fsMod.collection(db, 'users', this.user.uid, 'leads', id, 'history'));
+            for (const d of histSnap.docs) await fsMod.deleteDoc(d.ref);
+            await fsMod.deleteDoc(fsMod.doc(db, 'users', this.user.uid, 'leads', id));
+          },
+          async saveProspect(p) {
+            if (!this.user) return;
+            const ref = fsMod.doc(db, 'prospects', p.id);
+            const snap = await fsMod.getDoc(ref);
+            const fields = {
+              name: p.name, contact: p.contact || '',
+              status: p.status || 'New Prospect', notes: p.notes || '', updatedAt: fsMod.serverTimestamp()
+            };
+            if (snap.exists()) {
+              await fsMod.updateDoc(ref, fields);
+            } else {
+              await fsMod.setDoc(ref, Object.assign({ userId: this.user.uid, createdAt: fsMod.serverTimestamp() }, fields));
+            }
+          },
+          async deleteProspect(id) {
+            if (!this.user) return;
+            await fsMod.deleteDoc(fsMod.doc(db, 'prospects', id));
+          },
+          async loadHistory(leadId) {
+            if (!this.user) return;
+            const snap = await fsMod.getDocs(fsMod.collection(db, 'users', this.user.uid, 'leads', leadId, 'history'));
+            state.history[leadId] = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+            persist();
+            if (!document.getElementById('historyModal').classList.contains('hidden') && document.getElementById('hmLeadId').value === leadId) {
+              renderHistoryList(leadId);
+            }
+          },
+          async saveHistory(leadId, h) {
+            if (!this.user) return;
+            await fsMod.setDoc(fsMod.doc(db, 'users', this.user.uid, 'leads', leadId, 'history', h.id), {
+              userId: this.user.uid, leadId, channel: h.channel, summary: h.summary, outcome: h.outcome || '',
+              createdAt: fsMod.serverTimestamp()
+            });
+          },
+          async deleteHistory(leadId, entryId) {
+            if (!this.user) return;
+            await fsMod.deleteDoc(fsMod.doc(db, 'users', this.user.uid, 'leads', leadId, 'history', entryId));
+          },
+          async saveProductNote(n) {
+            if (!this.user) return;
+            const ref = fsMod.doc(db, 'users', this.user.uid, 'productNotes', n.productId);
+            const snap = await fsMod.getDoc(ref);
+            const fields = {
+              verifiedSummary: n.verifiedSummary || '', verifiedEligibility: n.verifiedEligibility || '',
+              verifiedSourceDate: n.verifiedSourceDate || '', isVerifiedByUser: !!n.isVerifiedByUser,
+              updatedAt: fsMod.serverTimestamp()
+            };
+            if (snap.exists()) {
+              await fsMod.updateDoc(ref, fields);
+            } else {
+              await fsMod.setDoc(ref, Object.assign({ userId: this.user.uid, productId: n.productId, createdAt: fsMod.serverTimestamp() }, fields));
+            }
+          },
+          async saveTargets(tg) {
+            if (!this.user) return;
+            const ref = fsMod.doc(db, 'users', this.user.uid, 'gmSettings', 'monthly_targets');
+            const snap = await fsMod.getDoc(ref);
+            const fields = {
+              targetMonth: tg.targetMonth, salesTarget: tg.salesTarget,
+              outreachTarget: tg.outreachTarget, referralTarget: tg.referralTarget,
+              updatedAt: fsMod.serverTimestamp()
+            };
+            if (snap.exists()) {
+              await fsMod.updateDoc(ref, fields);
+            } else {
+              await fsMod.setDoc(ref, Object.assign({ userId: this.user.uid, createdAt: fsMod.serverTimestamp() }, fields));
+            }
+          }
+        };
+        window.cloudSyncApi = api;
+
+        authMod.onAuthStateChanged(auth, user => {
+          unsubs.forEach(u => u());
+          unsubs = [];
+          api.user = user;
+          const dot = document.getElementById('syncDot');
+          const lbl = document.getElementById('syncLabel');
+          const userTxt = document.getElementById('cloudUserText');
+          const inBtn = document.getElementById('googleSignInWebBtn');
+          const outBtn = document.getElementById('googleSignOutWebBtn');
+
+          if (user) {
+            dot.classList.remove('local');
+            lbl.textContent = user.email || 'Cloud Synced';
+            userTxt.textContent = 'Signed in: ' + (user.email || user.uid);
+            inBtn.classList.add('hidden');
+            outBtn.classList.remove('hidden');
+
+            let mergedInitialLeads = false;
+            let mergedInitialProspects = false;
+
+            unsubs.push(fsMod.onSnapshot(fsMod.collection(db, 'users', user.uid, 'leads'), async snap => {
+              const cloudIds = new Set(snap.docs.map(d => d.id));
+              if (!mergedInitialLeads) {
+                mergedInitialLeads = true;
+                for (const localLead of (state.leads || [])) {
+                  if (localLead && localLead.id && !cloudIds.has(localLead.id)) {
+                    try { await api.saveLead(localLead); } catch (_) {}
+                  }
+                }
+              }
+              const cloudLeads = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+              if (cloudLeads.length > 0 || state.leads.length === 0) {
+                state.leads = cloudLeads;
+                persist();
+              }
+            }));
+            unsubs.push(fsMod.onSnapshot(fsMod.query(fsMod.collection(db, 'prospects'), fsMod.where('userId', '==', user.uid)), async snap => {
+              const cloudIds = new Set(snap.docs.map(d => d.id));
+              if (!mergedInitialProspects) {
+                mergedInitialProspects = true;
+                for (const localP of (state.prospects || [])) {
+                  if (localP && localP.id && !cloudIds.has(localP.id)) {
+                    try { await api.saveProspect(localP); } catch (_) {}
+                  }
+                }
+              }
+              const cloudProspects = snap.docs.map(d => Object.assign({ id: d.id }, d.data()));
+              if (cloudProspects.length > 0 || state.prospects.length === 0) {
+                state.prospects = cloudProspects;
+                persist();
+              }
+            }));
+            unsubs.push(fsMod.onSnapshot(fsMod.collection(db, 'users', user.uid, 'productNotes'), snap => {
+              snap.docs.forEach(d => { state.productNotes[d.id] = d.data(); });
+              persist();
+            }));
+            unsubs.push(fsMod.onSnapshot(fsMod.doc(db, 'users', user.uid, 'gmSettings', 'monthly_targets'), snap => {
+              if (snap.exists()) { state.targets = Object.assign({}, state.targets, snap.data()); persist(); }
+            }));
+          } else {
+            dot.classList.add('local');
+            lbl.textContent = t('localModeShort');
+            userTxt.textContent = 'Local Browser Mode (Instant Work)';
+            inBtn.classList.remove('hidden');
+            outBtn.classList.add('hidden');
+          }
+        });
+
+        window.signInFirebaseWeb = async () => {
+          try {
+            const provider = new authMod.GoogleAuthProvider();
+            await authMod.signInWithPopup(auth, provider);
+            showToast('Cloud Sync connected');
+          } catch (e) {
+            alert('Cloud Sign-In notice: ' + (e.message || e) + '\n\nLocal browser storage continues to work immediately. To enable Cloud Sync on your website domain, add your domain in Firebase Console -> Authentication -> Settings -> Authorized domains.');
+          }
+        };
+        window.signOutFirebaseWeb = async () => {
+          await authMod.signOut(auth);
+          showToast('Signed out');
+        };
+      } catch (e) {
+        console.warn('Optional cloud sync unavailable offline:', e);
+      }
+    }
+
+    if (!window.signInFirebaseWeb) {
+      window.signInFirebaseWeb = () => alert('Local browser mode is active (opened directly from file or offline). Host via GitHub Pages / HTTPS and add your domain in Firebase Authentication -> Authorized domains to enable Google Cloud Sync.');
+      window.signOutFirebaseWeb = () => {};
+    }
+    initOptionalFirebase();
+  </script>
+</body>
+</html>

@@ -26,7 +26,7 @@ import kotlinx.coroutines.withContext
 private const val TAG = "Auth"
 
 @SuppressLint("DiscouragedApi")
-private fun resolveDefaultWebClientId(context: Context): String? {
+internal fun resolveDefaultWebClientId(context: Context): String? {
     val resId = context.resources.getIdentifier(
         "default_web_client_id",
         "string",
