@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "560884538260-lguoc2e337u6sjjnkssv0iesg0viaall.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aistudio.askaritakaful.kmqxrz",
+            "certificate_hash": "018f7983a90972504dd77d199f3c38d0f4052e93"
+          }
+        },
+        {
           "client_id": "560884538260-p4am7d2ph7iumrj6hpjcqo0gj8mfpgot.apps.googleusercontent.com",
           "client_type": 3
         }
